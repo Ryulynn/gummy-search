@@ -1,0 +1,88 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.7
+    working_directory: ~/gummy-search # githubのリポジトリ名
+    steps:
+      - checkout:
+          path: ~/gummy-search # githubのリポジトリ名
+      - ruby/install-deps
+
+  rubocop:
+    docker:
+      - image: circleci/ruby:2.7
+      - image: circleci/mysql:5.5
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: gummy_search_test
+          MYSQL_USER: root
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/gummy-search
+    steps:
+      - checkout:
+          path: ~/gummy-search
+      - restore_cache:
+          keys:
+            - gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gemfiles-{{ .Branch }}-
+            - gemfiles-master-
+      - ruby/install-deps
+      - run:
+          name: database migrate
+          command: docker-compose exec web bundle exec rails db:migrate
+      - run:
+          name: Run rubocop
+          command: docker-compose exec web bundle exec rubocop --parallel
+      - save_cache:
+          key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+  rspec:
+    docker:
+      - image: circleci/ruby:2.7
+      - image: circleci/mysql:5.5
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: gummy_search_test
+          MYSQL_USER: root
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DATABASE_HOST: "127.0.0.1"
+      RAILS_ENV: test
+    working_directory: ~/gummy-search
+    steps:
+      - checkout:
+          path: ~/gummy-search
+      - ruby/install-deps
+      - setup_remote_docker
+      - run:
+          name: database migrate
+          command: docker-compose exec web bundle exec rails db:migrate
+      - run:
+          name: database setup
+          command: docker-compose exec web bundle exec rails db:schema:load --trace
+      - run:
+          name: run rspec
+          command: docker-compose exec web rspec
+
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build
+      - rubocop
+          requires:
+            - build
+      - rspec
+          requires:
+            - rubocop
