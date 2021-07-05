@@ -67,6 +67,12 @@ jobs:
           command: |
             echo "export COMPOSE_FILE=docker-compose.development.yml" >> $BASH_ENV
       - run:
+          name: Start containers and verify it is working
+          command: |
+            set -x
+            docker-compose up -d
+            docker exec web curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+      - run:
           name: database migrate
           command: docker-compose exec web bundle exec rails db:migrate
       - run:
