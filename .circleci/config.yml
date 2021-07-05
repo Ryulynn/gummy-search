@@ -36,9 +36,6 @@ jobs:
             - gemfiles-master-
       - ruby/install-deps
       - run:
-          name: database migrate
-          command: docker-compose exec web bundle exec rails db:migrate
-      - run:
           name: Run rubocop
           command: docker-compose exec web bundle exec rubocop --parallel
       - save_cache:
