@@ -70,7 +70,7 @@ jobs:
           command: docker-compose exec web bundle exec rails db:schema:load --trace
       - run:
           name: run rspec
-          command: docker-compose exec web rspec
+          command: docker-compose exec web bundle exec rspec
 
 workflows:
   version: 2.1
