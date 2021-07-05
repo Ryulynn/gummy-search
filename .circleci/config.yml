@@ -80,9 +80,9 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - rubocop
+      - rubocop:
           requires:
             - build
-      - rspec
+      - rspec:
           requires:
             - rubocop
