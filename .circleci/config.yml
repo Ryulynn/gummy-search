@@ -65,7 +65,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run: yarn install
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - save_cache:
           paths:
             - ./vendor/bundle
