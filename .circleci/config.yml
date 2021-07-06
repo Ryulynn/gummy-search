@@ -68,12 +68,12 @@ jobs:
       - run:
           name: Start containers and verify it is working
           command: docker-compose up -d
-      - run:
-          name: database migrate
-          command: docker-compose exec web bundle exec rails db:migrate
-      - run:
-          name: database setup
-          command: docker-compose exec web bundle exec rails db:schema:load --trace
+      #- run:
+          #name: database migrate
+          #command: docker-compose exec web bundle exec rails db:migrate
+      #- run:
+          #name: database setup
+          #command: docker-compose exec web bundle exec rails db:schema:load --trace
       - run:
           name: run rspec
           command: docker-compose exec web bundle exec rspec
