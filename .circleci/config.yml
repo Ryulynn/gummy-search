@@ -59,17 +59,26 @@ jobs:
     working_directory: ~/gummy-search
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rake db:create
       - run:
-          name: bundle install
-          command: bundle install --path vendor/bundle
+          name: Database setup
+          command: bundle exec rails db:migrate
+      - run: bundle exec rake db:schema:load
+      # Rspec
+      #- run: bundle exec rails assets:precompile
       - run:
-          name: データベースの起動を待機
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-      - run:
-          name: データベースのセットアップ
-          command: bundle exec rake db:schema:load
-      - run:
-          name: テストの実行
+          name: Rspec
           command: bundle exec rspec
 
 workflows:
