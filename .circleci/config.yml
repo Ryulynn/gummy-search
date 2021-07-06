@@ -64,8 +64,6 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: bundle exec rails webpacker:install
-      - run: bundle exec rails webpacker:conpile
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
@@ -80,7 +78,12 @@ jobs:
       #- run: bundle exec rails assets:precompile
       - run:
           name: Rspec
-          command: bundle exec rspec
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
 workflows:
   version: 2.1
