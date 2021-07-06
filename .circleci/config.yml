@@ -46,36 +46,33 @@ jobs:
   rspec:
     docker:
       - image: circleci/ruby:2.7
+        environment:
+          RAILS_ENV: test
+          POSTGRES_HOST: 127.0.0.1
       - image: circleci/mysql:5.5
         environment:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: gummy_search_test
           MYSQL_USER: root
-    environment:
-      BUNDLE_JOBS: "3"
-      BUNDLE_RETRY: "3"
-      APP_DATABASE_HOST: "127.0.0.1"
-      RAILS_ENV: test
     working_directory: ~/gummy-search
     steps:
-      - checkout:
-          path: ~/gummy-search
-      - ruby/install-deps
-      - setup_remote_docker
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      # Rspec
       - run:
-          name: Setup environment variable
-          command: echo "export COMPOSE_FILE=docker-compose.development.yml" >> $BASH_ENV
-      - run:
-          name: Start containers and verify it is working
-          command: docker-compose up -d
-      #- run:
-          #name: database migrate
-          #command: docker-compose exec web bundle exec rails db:migrate
-      #- run:
-          #name: database setup
-          #command: docker-compose exec web bundle exec rails db:schema:load --trace
-      - run:
-          name: run rspec
+          name: Rspec
           command: bundle exec rspec
 
 workflows:
