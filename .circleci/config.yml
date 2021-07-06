@@ -90,12 +90,9 @@ jobs:
             bundle exec bin/rails db:create
             bundle exec rails db:migrate
       # Run rspec in parallel
-      - type: shell
-        command: |
-          bundle exec rspec --profile 10 \
-                            --out test_results/rspec.xml \
-                            --format progress \
-                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests
+      - run:
+          name: Rspec
+          command: bundle exec rspec
 
 workflows:
   version: 2.1
