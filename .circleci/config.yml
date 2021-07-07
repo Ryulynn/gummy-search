@@ -36,11 +36,8 @@ jobs:
             - gemfiles-master-
       - ruby/install-deps
       - run:
-          name: database migrate
-          command: docker-compose exec web bundle exec rails db:migrate
-      - run:
           name: Run rubocop
-          command: docker-compose exec web bundle exec rubocop --parallel
+          command: bundle exec rubocop --parallel
       - save_cache:
           key: gemfiles-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
@@ -48,7 +45,7 @@ jobs:
 
   rspec:
     docker:
-      - image: circleci/ruby:2.7
+      - image: cimg/ruby:2.7-node
       - image: circleci/mysql:5.5
         environment:
           MYSQL_ROOT_PASSWORD: password
@@ -61,28 +58,51 @@ jobs:
       RAILS_ENV: test
     working_directory: ~/gummy-search
     steps:
-      - checkout:
-          path: ~/gummy-search
-      - ruby/install-deps
-      - setup_remote_docker
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
-          name: database migrate
-          command: docker-compose exec web bundle exec rails db:migrate
+          name: bundle install
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run:
-          name: database setup
-          command: docker-compose exec web bundle exec rails db:schema:load --trace
+          name: "Node.js と npm の更新"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
       - run:
-          name: run rspec
-          command: docker-compose exec web rspec
+          name: yarn install
+          command: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run:
+          name: install yarn's library
+          command: bin/yarn
+      - run:
+          name: compile javascript
+          command: bin/webpack
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: create db
+          command: bundle exec rake db:create
+      - run:
+          name: Database setup
+          command: bundle exec rails db:migrate
+      - run:
+          name: Rspec
+          command: bundle exec rspec
 
 workflows:
   version: 2.1
   build_and_test:
     jobs:
       - build
-      - rubocop
+      - rubocop:
           requires:
             - build
-      - rspec
+      - rspec:
           requires:
             - rubocop
