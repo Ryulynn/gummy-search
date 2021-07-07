@@ -7,7 +7,7 @@ RSpec.describe "samples", type: :request do
     end
 
     it "httpステータスが200を返すこと" do
-      expect(response).to have_http_status "200"
+      expect(response).to have_http_status "201"
     end
   end
 end
