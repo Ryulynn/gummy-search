@@ -45,7 +45,6 @@ jobs:
 
   rspec:
     docker:
-      #- image: circleci/ruby:2.7
       - image: cimg/ruby:2.7-node
       - image: circleci/mysql:5.5
         environment:
@@ -65,26 +64,33 @@ jobs:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: bundle install
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run:
           name: "Node.js と npm の更新"
           command: |
             curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | sudo bash
-      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-      - run: bin/yarn
-      - run: bin/webpack
+      - run:
+          name: yarn install
+          command: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run:
+          name: install yarn's library
+          command: bin/yarn
+      - run:
+          name: compile javascript
+          command: bin/webpack
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
+      - run:
+          name: create db
+          command: bundle exec rake db:create
       - run:
           name: Database setup
           command: bundle exec rails db:migrate
-      - run: bundle exec rake db:schema:load
-      # Rspec
-      #- run: bundle exec rails assets:precompile
       - run:
           name: Rspec
           command: bundle exec rspec
