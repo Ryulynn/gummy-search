@@ -45,7 +45,8 @@ jobs:
 
   rspec:
     docker:
-      - image: circleci/ruby:2.7
+      #- image: circleci/ruby:2.7
+      - image: cimg/ruby:2.7.1-node
       - image: circleci/mysql:5.5
         environment:
           MYSQL_ROOT_PASSWORD: password
@@ -65,6 +66,11 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: "Node.js と npm の更新"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
       - run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - save_cache:
           paths:
