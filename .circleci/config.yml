@@ -101,8 +101,7 @@ jobs:
       - image: circleci/ruby:2.7.3
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 19.03.13
+      - setup_remote_docker
       - heroku/install
       - run:
           name: heroku login
