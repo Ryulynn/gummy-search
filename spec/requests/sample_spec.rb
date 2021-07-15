@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "samples", type: :request do
   describe "GET /index" do
     before do
-      get "/"
+      get "/sample"
     end
 
     it "httpステータスが200を返すこと" do
