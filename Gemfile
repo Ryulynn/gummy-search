@@ -36,6 +36,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'capybara', '>= 3.26'
   gem 'rubocop-airbnb'
+  gem "dotenv-rails"
 end
 
 group :development do

@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+body{
+  width: 1140px;
+  margin: 0 auto;
+}
+
+.header{
+  background-color: blueviolet;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.header a{
+  margin: auto 0;
+  text-decoration: none;
+  color: black;
+}
+
+.app_name{
+  font-size: 22px;
+}
+
+.header ul{
+  margin-right: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: space around;
+}
+
+.header li{
+  margin-left: 10px;
+}
