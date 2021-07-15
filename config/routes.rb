@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/sample', to: 'samples#index'
   root to: 'home#top'
   get '/about', to: 'home#about'
+  resources :users
 end
