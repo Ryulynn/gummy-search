@@ -6,13 +6,13 @@
 <div class="user_sign_up">
   <h3>新しいアカウントを作成</h3>
   <%= form_with model: @user do |f| %>
-    <p>ユーザー名(最大8文字)</p>
+    <%= f.label :name, "ユーザー名(最大8文字)" %>
     <%= f.text_field :name %>
-    <p>メールアドレス</p>
+    <%= f.label :email, "メールアドレス" %>
     <%= f.email_field :email %>
-    <p>パスワード</p>
+    <%= f.label :password, "パスワード" %>
     <%= f.password_field :password %>
-    <p>パスワード(確認用)</p>
+    <%= f.label :password_confirmation, "パスワード(確認用)" %>
     <%= f.password_field :password_confirmation %>
     </br>
     <%= f.submit "新規登録" %>
