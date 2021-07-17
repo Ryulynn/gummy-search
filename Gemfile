@@ -34,6 +34,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-byebug'
   gem 'capybara', '>= 3.26'
   gem 'rubocop-airbnb'
   gem 'dotenv-rails'
