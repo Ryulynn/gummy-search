@@ -2,7 +2,11 @@
   <%= link_to "グミサーチ", root_path, class: "app_name" %>
   <ul>
     <li><%= link_to "グミサーチとは？", about_path %></li>
-    <li>ログイン</li>
-    <li><%= link_to "新規登録", new_user_path %></li>
+    <% if logged_in? %>
+      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "ログイン", login_path %></li>
+      <li><%= link_to "新規登録", new_user_path %></li>
+    <% end %>
   </ul>
 </div>
