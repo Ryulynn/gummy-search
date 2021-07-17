@@ -12,6 +12,7 @@
     <header>
       <%= render "/shared/header" %>
     </header>
+    <%= render "/shared/flash" %>
     <%= yield %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
