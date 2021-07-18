@@ -1,8 +1,12 @@
 <div class="header">
-  <%= link_to "グミサーチ", root_path, class: "app_name" %>
+  <div>
+    <%= link_to "グミサーチ", root_path, class: "app_name" %>
+    <%= link_to "グミサーチとは？", about_path %>
+  </div>
   <ul>
-    <li><%= link_to "グミサーチとは？", about_path %></li>
     <% if logged_in? %>
+      <li><%= current_user %></li>
+      <li><%= link_to "マイアカウント", user_path(session[:user_id]) %></li>
       <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
     <% else %>
       <li><%= link_to "ログイン", login_path %></li>
