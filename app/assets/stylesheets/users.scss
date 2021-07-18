@@ -1,3 +1,70 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ============edit============
+
+.acbox{
+  width: auto;
+  font-size:0px; /* ラベルと開く部分を分離する時は数値を入れる */
+  margin:0 10px; /* ボックス全体の位置調整 */
+}
+
+.aclabel{
+  width: auto;
+  font-size: 16px; /* ラベルの文字サイズ */
+  font-weight: bold;
+  text-align: center;
+  background: #8BC34A; /* ラベルの背景色 */
+  position: relative;
+  display: block;
+  padding:8px;
+  border-radius: 4px; /* ラベルの角の丸み */
+  cursor: pointer;
+  color: #fff;
+}
+
+.aclabel:hover{
+  background: #8BC34A; /* ラベルにマウスを乗せた時の背景色 */
+}
+
+.acinput{
+  display: none;
+}
+
+.aclabel:after{
+  color: #fff;
+  content:"▼"; /* ラベルのアイコン */
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -14px;
+}
+
+.acinput:checked ~ .aclabel::after {
+  content:"▲"; /* ラベルをクリックした後のアイコン */
+}
+
+.acbox-under{
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.15s; /* 開閉スピードの設定 */
+}
+
+.acinput:checked ~ div{
+  height: auto;
+  padding: 18px; /* 開いた部分の枠内の余白 */
+  border-radius: 0px;
+  background: #F3F4F5; /* 開いた部分の背景色 */
+  opacity: 1;
+}
+
+.acinput:checked ~ .aclabel {
+  background: #8BC34A; /* クリック後のラベルの背景色 */
+}
+
+.acbox-under{
+  font-size: 15px; /* 開いた部分の文字サイズ */
+  color: #555555; /* 開いた部分の文字色 */
+}
