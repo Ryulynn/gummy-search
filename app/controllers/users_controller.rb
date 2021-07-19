@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only:[:edit, :show, :update, :destroy]
-  before_action :correct_account?, only:[:edit, :show, :update, :destroy]
-  before_action :not_logged_in_user, only:[:new]
+  before_action :logged_in_user, only: [:edit, :show, :update, :destroy]
+  before_action :correct_account?, only: [:edit, :show, :update, :destroy]
+  before_action :not_logged_in_user, only: [:new]
 
   def new
     @user = User.new
