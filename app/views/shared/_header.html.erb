@@ -7,7 +7,11 @@
     <% if logged_in? %>
       <li>
         <div class="image_div">
-          <%= image_tag current_user_image %>
+          <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
+            <%= image_tag "/assets/default_user_icon.jpg" %>
+          <% else %>
+            <%= image_tag "#{current_user_image}" %>
+          <% end %>
         </div>
       </li>
       <li><%= current_user %></li>

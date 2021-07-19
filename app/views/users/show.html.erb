@@ -4,10 +4,14 @@
   <p><%= @user.name %></p>
   <p>メールアドレス</p>
   <p><%= @user.email %></p>
-  <p>アイコン画像</p>
+  <p>アイコン画像(<%= current_user_image.identifier.to_s %>)</p>
   <p>
     <div class="image_div">
-      <%= image_tag @user.image %>
+      <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
+        <%= image_tag "/assets/default_user_icon.jpg" %>
+      <% else %>
+        <%= image_tag "#{current_user_image}" %>
+      <% end %>
     </div>
   </p>
   <%= button_to "ログアウト", logout_path, method: :delete %>
