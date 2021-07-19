@@ -5,7 +5,11 @@
   <p>メールアドレス</p>
   <p><%= @user.email %></p>
   <p>アイコン画像</p>
-  <p><%= @user.image %></p>
+  <p>
+    <div class="image_div">
+      <%= image_tag @user.image %>
+    </div>
+  </p>
   <%= button_to "ログアウト", logout_path, method: :delete %>
   <h3>登録情報の変更</h3>
   <%= button_to "変更", edit_user_path, method: :get %>

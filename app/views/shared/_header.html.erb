@@ -5,6 +5,11 @@
   </div>
   <ul>
     <% if logged_in? %>
+      <li>
+        <div class="image_div">
+          <%= image_tag current_user_image %>
+        </div>
+      </li>
       <li><%= current_user %></li>
       <li><%= link_to "マイアカウント", user_path(session[:user_id]) %></li>
       <li><%= link_to "ログアウト", logout_path, method: :delete %></li>

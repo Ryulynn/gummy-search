@@ -9,6 +9,12 @@ module SessionsHelper
     end
   end
 
+  def current_user_image
+    if session[:user_id]
+      User.find_by(id: session[:user_id]).image
+    end
+  end
+
   def current_user?(user)
     user.name == current_user
   end

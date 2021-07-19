@@ -2,6 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+// ============show============
+.user_show{
+  background-color: #999999;
+
+  .image_div{
+    width: 100px;
+    height: 100px;
+  }
+
+  img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
 // ============edit============
 
 .acbox{
