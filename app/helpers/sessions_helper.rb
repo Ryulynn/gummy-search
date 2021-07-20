@@ -16,7 +16,11 @@ module SessionsHelper
   end
 
   def current_user?(user)
-    user.name == current_user
+    if user.nil? # 存在しないデータの入力でfalse
+      false
+    else
+      user.name == current_user
+    end
   end
 
   def logged_in?
