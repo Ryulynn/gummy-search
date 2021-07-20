@@ -39,6 +39,7 @@ group :development, :test do
   gem 'capybara', '>= 3.26'
   gem 'rubocop-airbnb'
   gem 'dotenv-rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
