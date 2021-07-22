@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
   describe "GET /new" do
-    it "returns http success" do
+    before do
       get login_path
-      expect(response).to have_http_status(:success)
+    end
+
+    it "httpステータスが200を返すこと" do
+      expect(response).to have_http_status "200"
     end
   end
 end
