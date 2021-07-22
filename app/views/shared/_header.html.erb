@@ -1,7 +1,7 @@
 <div class="header">
   <div>
     <%= link_to "グミサーチ", root_path, class: "app_name" %>
-    <%= link_to "グミサーチとは？", about_path %>
+    <%= link_to "グミサーチとは？", about_path, id: "about-link" %>
   </div>
   <ul>
     <% if logged_in? %>
