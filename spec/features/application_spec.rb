@@ -55,8 +55,8 @@ RSpec.feature "application.html.erbに正しい情報の表示", type: :feature 
     context "ログインしている場合" do
       background do
         visit login_path
-        fill_in 'メールアドレス', with: "#{user.email}"
-        fill_in 'パスワード', with: "#{user.password}"
+        fill_in 'session-name-form', with: "#{user.email}"
+        fill_in 'session-password-form', with: "#{user.password}"
         click_on "Log in"
         visit root_path
       end
