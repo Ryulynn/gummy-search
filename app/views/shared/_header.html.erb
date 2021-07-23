@@ -1,8 +1,25 @@
 <div class="header">
-  <%= link_to "グミサーチ", root_path, class: "app_name" %>
+  <div>
+    <%= link_to "グミサーチ", root_path, class: "app_name" %>
+    <%= link_to "グミサーチとは？", about_path, id: "about-link" %>
+  </div>
   <ul>
-    <li><%= link_to "グミサーチとは？", about_path %></li>
-    <li>ログイン</li>
-    <li>新規登録</li>
+    <% if logged_in? %>
+      <li>
+        <div class="image_div">
+          <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
+            <%= image_tag "/assets/default_user_icon.jpg" %>
+          <% else %>
+            <%= image_tag "#{current_user_image}" %>
+          <% end %>
+        </div>
+      </li>
+      <li><%= current_user %></li>
+      <li><%= link_to "マイアカウント", user_path(session[:user_id]) %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to "ログイン", login_path %></li>
+      <li><%= link_to "新規登録", new_user_path %></li>
+    <% end %>
   </ul>
 </div>

@@ -1,0 +1,28 @@
+<!--エラーメッセージ-->
+<div class="error_message">
+    <%= render"shared/error", obj: @user %>
+</div>
+<!--登録フォーム-->
+<div class="user_edit">
+  <h3>アカウント編集</h3>
+  <%= form_with model: @user do |f| %>
+    <%= f.label :name, "ユーザー名(最大8文字)" %>
+    <%= f.text_field :name, id: "edit-name-form" %>
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, id: "edit-email-form" %>
+    <%= f.label :image, "アイコン画像" %>
+    <%= f.file_field :image, id: "edit-image-form" %>
+    <div class="acbox">
+      <input class="acinput" id="ac-1" type="checkbox" />
+      <label class="aclabel" for="ac-1">パスワードを変更する方はこちら</label>
+      <div class="acbox-under">
+          <%= f.label :password, "パスワード" %>
+          <%= f.password_field :password, id: "edit-password-form" %>
+          <%= f.label :password_confirmation, "パスワード(確認用)" %>
+          <%= f.password_field :password_confirmation, id: "edit-password-confirmation-form" %>
+      </div>
+    </div>
+    </br>
+    <%= f.submit "変更", id: "edit-change-button" %>
+  <% end %>
+</div>

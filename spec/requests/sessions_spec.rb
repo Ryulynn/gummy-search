@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "samples", type: :request do
-  describe "GET /index" do
+RSpec.describe "Sessions", type: :request do
+  describe "GET /new" do
     before do
-      get "/sample"
+      get login_path
     end
 
     it "httpステータスが200を返すこと" do
