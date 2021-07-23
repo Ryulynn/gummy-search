@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "application.html.erbに正しい情報の表示", type: :feature do
+RSpec.feature "application機能のfeatureテスト", type: :feature do
   given(:user) { create(:user) }
 
   feature "ヘッダー部分の表示" do
