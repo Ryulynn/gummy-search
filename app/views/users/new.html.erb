@@ -7,16 +7,16 @@
   <h3>新しいアカウントを作成</h3>
   <%= form_with model: @user do |f| %>
     <%= f.label :name, "ユーザー名(最大8文字)" %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, id: "new-name-form" %>
     <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, id: "new-email-form" %>
     <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, id: "new-password-form" %>
     <%= f.label :password_confirmation, "パスワード(確認用)" %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, id: "new-password-confirmation-form" %>
     </br>
-    <%= f.submit "新規登録" %>
+    <%= f.submit "新規登録", id: "new-register-button" %>
   <% end %>
   <h3>アカウントをお持ちの方はこちら</h3>
-  <%= button_to "ログイン", login_path, method: :get %>
+  <%= button_to "ログイン", login_path, method: :get, id: "new-login-button" %>
 </div>

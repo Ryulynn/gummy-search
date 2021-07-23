@@ -6,7 +6,7 @@
   <p><%= @user.email %></p>
   <p>アイコン画像</p>
   <p>
-    <div class="image_div">
+    <div class="show_image_div">
       <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
         <%= image_tag "/assets/default_user_icon.jpg" %>
       <% else %>
@@ -14,9 +14,9 @@
       <% end %>
     </div>
   </p>
-  <%= button_to "ログアウト", logout_path, method: :delete %>
+  <%= button_to "ログアウト", logout_path, method: :delete, id: "show-logout-button" %>
   <h3>登録情報の変更</h3>
-  <%= button_to "変更", edit_user_path, method: :get %>
+  <%= button_to "変更", edit_user_path, method: :get, id: "show-change-button" %>
   <h3>アカウントを削除する</h3>
-  <%= button_to "アカウントを削除", user_path, method: :delete %>
+  <%= button_to "アカウントを削除", user_path, method: :delete, id: "show-delete-button" %>
 </div>
