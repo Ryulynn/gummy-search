@@ -10,6 +10,13 @@ class GummiesController < ApplicationController
 
   def create
     @gummy = Gummy.new(gummy_params)
+    @flavors = Flavor.all
+    if @gummy.save
+      flash[:notice] = "グミを登録しました"
+      redirect_to gummies_path
+    else
+      render "new"
+    end
   end
 
   def show
@@ -26,7 +33,7 @@ class GummiesController < ApplicationController
 
   private
 
-  def user_params
+  def gummy_params
     params.require(:gummy).permit(:name, :image, :flavor_id_1, :flavor_id_2, :flavor_id_3, :flavor_id_4)
   end
 end
