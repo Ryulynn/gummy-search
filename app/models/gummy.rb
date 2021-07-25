@@ -1,0 +1,2 @@
+class Gummy < ApplicationRecord
+end
