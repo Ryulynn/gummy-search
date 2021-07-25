@@ -1,10 +1,11 @@
-class GummysController < ApplicationController
+class GummiesController < ApplicationController
   def index
     @gummies = Gummy.all
   end
 
   def new
     @gummy = Gummy.new
+    @flavors = Flavor.all
   end
 
   def create
