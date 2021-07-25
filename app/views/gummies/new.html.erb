@@ -11,13 +11,13 @@
     <%= f.label :image, "商品画像（必須）" %>
     <%= f.file_field :image, id: "new-gummy-image-form" %>
     <%= f.label :flavor_id_1, "フレーバー１（必須）"%>
-    <%= f.collection_select(:flavor_id_1, @flavors, :id, :name) %>
+    <%= f.collection_select(:flavor_id_1, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     <%= f.label :flavor_id_2, "フレーバー２（任意）"%>
-    <%= f.collection_select(:flavor_id_2, @flavors, :id, :name) %>
+    <%= f.collection_select(:flavor_id_2, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     <%= f.label :flavor_id_3, "フレーバー３（任意）"%>
-    <%= f.collection_select(:flavor_id_3, @flavors, :id, :name) %>
+    <%= f.collection_select(:flavor_id_3, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     <%= f.label :flavor_id_4, "フレーバー４（任意）"%>
-    <%= f.collection_select(:flavor_id_4, @flavors, :id, :name) %>
+    <%= f.collection_select(:flavor_id_4, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     </br>
     <%= f.submit "グミを登録", id: "new-gummy-register-button" %>
   <% end %>
