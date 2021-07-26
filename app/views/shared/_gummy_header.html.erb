@@ -1,0 +1,18 @@
+<div class="gummy_show_header">
+  <div>
+    <h3><%= gummy.name %>(<%= Flavor.find_by(id: gummy.flavor_id_1).name %>)</h3>
+    <div class="gummy_show_header_content">
+      <div class="gummy_show_image">
+        <%= image_tag "#{gummy.image}" %>
+      </div>
+      <div>
+        <h3>レビューを投稿する</h3>
+        <h3>目撃情報を投稿する</h3>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p>レビュー</p>
+    <p>目撃情報</p>
+  </div>
+</div>

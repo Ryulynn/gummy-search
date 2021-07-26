@@ -20,6 +20,7 @@ class GummiesController < ApplicationController
   end
 
   def show
+    @gummy = Gummy.find_by(id: params[:id])
   end
 
   def edit
