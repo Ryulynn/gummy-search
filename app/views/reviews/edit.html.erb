@@ -1,0 +1,14 @@
+<!--エラーメッセージ-->
+<div class="error_message">
+    <%= render"shared/error", obj: @user %>
+</div>
+<!--編集フォーム-->
+<div class="review_edit">
+  <h3>レビュー編集</h3>
+  <%= form_with model: @review do |f| %>
+    <%= f.label :comment, "レビュー内容" %>
+    <%= f.text_area :comment %>
+    </br>
+    <%= f.submit "変更" %>
+  <% end %>
+</div>

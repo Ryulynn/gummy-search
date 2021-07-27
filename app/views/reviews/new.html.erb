@@ -1,2 +1,22 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<!--エラーメッセージ-->
+<div class="error_message">
+  <%= render"shared/error", obj: @gummy %>
+</div>
+<!--登録フォーム-->
+<div class="rebiew_new">
+  <h4>レビューを投稿</h4>
+  <%= form_with model: @review do |f| %>
+    <div>
+      <span>商品名</span>
+      <span><%= @gummy.name %>(<%= Flavor.find_by(id: @gummy.flavor_id_1).name %>)</span>
+    </div>
+    <div>
+      <%= f.label :comment, "投稿内容" %>
+      <%= f.text_area :comment %>
+      <%= f.hidden_field :user_id, value: session[:user_id] %>
+      <%= f.hidden_field :gummy_id, value: @gummy.id %>
+      </br>
+      <%= f.submit "レビューを投稿" %>
+    </div>
+  <% end %>
+</div>
