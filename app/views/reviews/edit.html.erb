@@ -11,4 +11,6 @@
     </br>
     <%= f.submit "変更" %>
   <% end %>
+  <h3>レビューの削除</h3>
+  <%= link_to "削除", review_path(@review.id, user_id: @user.id), method: :delete %>
 </div>
