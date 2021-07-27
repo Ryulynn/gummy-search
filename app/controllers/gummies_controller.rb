@@ -21,6 +21,7 @@ class GummiesController < ApplicationController
 
   def show
     @gummy = Gummy.find_by(id: params[:id])
+    @reviews = Review.where(gummy_id: @gummy.id)
   end
 
   def edit
