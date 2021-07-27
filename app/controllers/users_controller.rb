@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :show, :update, :destroy]
-  before_action :correct_account?, only: [:edit, :show, :update, :destroy]
+  before_action :logged_in_user, only: [:edit, :show, :update, :destroy, :review]
+  before_action :correct_account?, only: [:edit, :show, :update, :destroy, :review]
   before_action :not_logged_in_user, only: [:new]
 
   def new
@@ -44,6 +44,16 @@ class UsersController < ApplicationController
     flash[:notice] = "アカウントを削除しました"
     log_out
     redirect_to root_path
+  end
+
+  def review
+    set_user
+    @reviews = Review.where(user_id: @user.id)
+    @gummies = Gummy.all
+    @flavors = Flavor.all
+  end
+
+  def map
   end
 
   private

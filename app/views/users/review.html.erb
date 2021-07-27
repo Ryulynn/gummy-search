@@ -1,0 +1,16 @@
+<div class="user_review">
+  <%if @reviews == [] %>
+    <p>投稿したレビューがありません</p>
+  <% else %>
+    <% @reviews.each do |review| %>
+      <div>
+        <%= link_to gummy_path(reviewed_gummy(review)) do %>
+          <span><%= reviewed_gummy(review).name %>(<%= reviewed_gummy_flavor(review) %>)</span>
+        <% end %>
+        <span><%= review.comment %></span>
+        <span><%= link_to "編集", edit_review_path(review.id, user_id: @user.id) %></span>
+        <span><%= link_to "削除", review_path(review.id, user_id: @user.id), method: :delete %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>
