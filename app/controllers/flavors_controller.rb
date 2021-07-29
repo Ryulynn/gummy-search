@@ -1,4 +1,6 @@
 class FlavorsController < ApplicationController
+  before_action :logged_in_user, only: [:new]
+
   def new
     @flavors = Flavor.all
     @flavor = Flavor.new
@@ -10,6 +12,7 @@ class FlavorsController < ApplicationController
       flash[:notice] = "フレーバーを登録しました"
       redirect_to new_flavor_path
     else
+      flash[:notice] = "登録できませんでした。入力内容に誤りがあります。"
       redirect_to new_flavor_path
     end
   end
