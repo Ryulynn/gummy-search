@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "user機能のfeatureテスト", type: :feature do
   let(:user) { create(:user) }
+  let(:flavor) { create(:flavor) }
+  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
+  let(:gummy2) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
+  let!(:review) { create(:review, user_id: user.id, gummy_id: gummy.id) }
+  let!(:review2) { create(:review, user_id: user.id, gummy_id: gummy2.id) }
 
   feature "users#new" do
     background do
@@ -76,6 +81,11 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
       expect(current_path).to eq root_path
       expect(page).to have_content "アカウントを削除しました"
     end
+
+    scenario "投稿したレビュー一覧リンククリック時に正しいリンク先へアクセス" do
+      click_on "投稿したレビュー一覧"
+      expect(current_path).to eq "/users/#{user.id}/review"
+    end
   end
 
   feature "users#edit" do
@@ -106,6 +116,31 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
       click_on "edit-change-button"
       edit_user = User.find_by(id: user.id)
       expect(edit_user.authenticate("edit_password")).to eq edit_user
+    end
+  end
+
+  feature "users#review" do
+    background do
+      visit login_path
+      fill_in 'session-name-form', with: "#{user.email}"
+      fill_in 'session-password-form', with: "#{user.password}"
+      click_on "Log in"
+      visit "/users/#{user.id}/review"
+    end
+
+    scenario "投稿したレビューが表示されること" do
+      expect(page).to have_selector '#user-review-comment-0', text: review.comment
+      expect(page).to have_selector '#user-review-comment-1', text: review2.comment
+    end
+
+    scenario "商品名クリック時に商品詳細ページにアクセス" do
+      click_on "#{gummy.name}"
+      expect(current_path).to eq gummy_path(gummy.id)
+    end
+
+    scenario "編集ボタンクリック時に正しいリンク先へアクセス" do
+      click_on 'user-review-edit-button-0' # idで指定
+      expect(current_path).to eq edit_review_path(review.id)
     end
   end
 end
