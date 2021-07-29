@@ -2,7 +2,7 @@
   <% @gummies.each_with_index do |gummy, i| %>
     <%= link_to gummy_path(gummy.id) do %>
       <div class="gummy_list">
-        <p><%= gummy.name %></p>
+        <p id="gummy-name-<%= i %>"><%= gummy.name %></p>
         <div class="gummy_image_div" id="gummy-image-<%= i %>">
           <%= image_tag "#{gummy.image}" %>
         </div>

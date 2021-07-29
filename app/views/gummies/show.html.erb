@@ -1,8 +1,8 @@
 <div class="gummy_show">
   <%= render "shared/gummy_header", gummy: @gummy %>
   <div>
-    <% @reviews.each do |review| %>
-      <p>
+    <% @reviews.each_with_index do |review, i| %>
+      <p id="gummy-show-review-<%= i %>">
         <%= review.comment %>
       </p>
     <% end %>

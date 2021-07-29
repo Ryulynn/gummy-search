@@ -12,11 +12,11 @@
     </div>
     <div>
       <%= f.label :comment, "投稿内容" %>
-      <%= f.text_area :comment %>
+      <%= f.text_area :comment, id: "review-new-comment-form" %>
       <%= f.hidden_field :user_id, value: session[:user_id] %>
       <%= f.hidden_field :gummy_id, value: @gummy.id %>
       </br>
-      <%= f.submit "レビューを投稿" %>
+      <%= f.submit "レビューを投稿", id: "review-new-register-button" %>
     </div>
   <% end %>
 </div>
