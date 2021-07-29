@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :logged_out, only: [:new]
+
   # login form
   def new
   end
@@ -22,5 +24,14 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     flash[:notice] = "ログアウトしました"
     redirect_to root_path
+  end
+
+  private
+
+  def logged_out
+    if logged_in?
+      flash[:notice] = "ログイン済みです"
+      redirect_to root_path
+    end
   end
 end

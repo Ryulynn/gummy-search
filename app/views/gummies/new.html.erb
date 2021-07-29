@@ -1,0 +1,26 @@
+<!--エラーメッセージ-->
+<div class="error_message">
+  <%= render"shared/error", obj: @gummy %>
+</div>
+<!--登録フォーム-->
+<div class="gummy_new">
+  <h3>新しいグミを登録</h3>
+  <%= form_with model: @gummy do |f| %>
+    <%= f.label :name, "商品名（必須）" %>
+    <%= f.text_field :name, id: "new-gummy-name-form" %>
+    <%= f.label :image, "商品画像（必須）" %>
+    <%= f.file_field :image, id: "new-gummy-image-form" %>
+    <%= f.label :flavor_id_1, "フレーバー１（必須）"%>
+    <%= f.collection_select(:flavor_id_1, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+    <%= f.label :flavor_id_2, "フレーバー２（任意）"%>
+    <%= f.collection_select(:flavor_id_2, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+    <%= f.label :flavor_id_3, "フレーバー３（任意）"%>
+    <%= f.collection_select(:flavor_id_3, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+    <%= f.label :flavor_id_4, "フレーバー４（任意）"%>
+    <%= f.collection_select(:flavor_id_4, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+    </br>
+    <%= f.submit "グミを登録", id: "new-gummy-register-button" %>
+  <% end %>
+  <h3>フレーバーが存在しない場合はこちら</h3>
+  <%= button_to "フレーバー追加", new_flavor_path, method: :get, id: "new-flavor-button" %>
+</div>
