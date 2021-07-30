@@ -4,8 +4,9 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
   let(:user) { create(:user) }
   let(:user_reviewed) { create(:user) }
   let(:flavor) { create(:flavor) }
-  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
-  let(:gummy_reviewed) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
+  let(:maker) { create(:maker) }
+  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
+  let(:gummy_reviewed) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
   let!(:gummy1) { create(:gummy, :skip_validate) }
   let!(:gummy2) { create(:gummy, :skip_validate) }
   let!(:review) { create(:review, user_id: user_reviewed.id, gummy_id: gummy_reviewed.id) }
@@ -28,6 +29,11 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
       fill_in 'session-password-form', with: "#{user.password}"
       click_on "Log in"
       visit new_gummy_path
+    end
+
+    scenario "メーカー登録画面に遷移できること" do
+      click_on 'new-maker-button' # idで指定
+      expect(current_path).to eq new_maker_path
     end
 
     scenario "フレーバー登録画面に遷移できること" do
