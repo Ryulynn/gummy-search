@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :users, :except => :index
   resources :gummies
   resources :flavors, :only => [:new, :create]
-  resources :flavors, :only => [:new, :create]
+  resources :makers, :only => [:new, :create]
   resources :reviews
 end
