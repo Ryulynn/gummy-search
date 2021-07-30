@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def admin_user?
+    unless admin_user
+      flash[:notice] = "不正なアクセスです"
+      redirect_to root_path
+    end
+  end
 end
