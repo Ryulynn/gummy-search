@@ -1,6 +1,6 @@
 <div class="gummy_show_header">
   <div>
-    <h3 id="show-gummy-name"><%= gummy.name %>(<%= Flavor.find_by(id: gummy.flavor_id_1).name %>)</h3>
+    <h3 id="show-gummy-name"><%= maker_name(gummy) %> <%= gummy.name %>(<%= flavor_name(gummy) %>)</h3>
     <div class="gummy_show_header_content">
       <div class="gummy_show_image">
         <%= image_tag "#{gummy.image}" %>

@@ -10,6 +10,8 @@
     <%= f.text_field :name, id: "new-gummy-name-form" %>
     <%= f.label :image, "商品画像（必須）" %>
     <%= f.file_field :image, id: "new-gummy-image-form" %>
+    <%= f.label :maker_id, "メーカー（必須）"%>
+    <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}) %>
     <%= f.label :flavor_id_1, "フレーバー１（必須）"%>
     <%= f.collection_select(:flavor_id_1, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     <%= f.label :flavor_id_2, "フレーバー２（任意）"%>
@@ -21,6 +23,8 @@
     </br>
     <%= f.submit "グミを登録", id: "new-gummy-register-button" %>
   <% end %>
+  <h3>メーカーが存在しない場合はこちら</h3>
+  <%= button_to "メーカー追加", new_maker_path, method: :get, id: "new-maker-button" %>
   <h3>フレーバーが存在しない場合はこちら</h3>
   <%= button_to "フレーバー追加", new_flavor_path, method: :get, id: "new-flavor-button" %>
 </div>
