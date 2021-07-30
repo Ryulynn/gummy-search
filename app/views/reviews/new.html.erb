@@ -8,7 +8,7 @@
   <%= form_with model: @review do |f| %>
     <div>
       <span>商品名</span>
-      <span><%= @gummy.name %>(<%= Flavor.find_by(id: @gummy.flavor_id_1).name %>)</span>
+      <span><%= @gummy.name %>(<%= flavor_name(@gummy) %>)</span>
     </div>
     <div>
       <%= f.label :comment, "投稿内容" %>
