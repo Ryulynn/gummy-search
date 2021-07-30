@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.feature "user機能のfeatureテスト", type: :feature do
   let(:user) { create(:user) }
   let(:flavor) { create(:flavor) }
-  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
-  let(:gummy2) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
+  let(:maker) { create(:maker) }
+  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
+  let(:gummy2) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
   let!(:review) { create(:review, user_id: user.id, gummy_id: gummy.id) }
   let!(:review2) { create(:review, user_id: user.id, gummy_id: gummy2.id) }
 

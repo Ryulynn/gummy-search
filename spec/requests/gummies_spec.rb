@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "Gummies", type: :request do
   let(:user) { create(:user) }
   let(:flavor) { create(:flavor) }
-  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
+  let(:maker) { create(:maker) }
+  let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
 
   describe "GET /index" do
     before do
