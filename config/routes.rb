@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get    'users/:id/review', to: 'users#review'
   get    'users/:id/map', to: 'users#map'
-  resources :users, :except => :index
+  resources :users
   resources :gummies
   resources :flavors, :only => [:new, :create]
   resources :makers, :only => [:new, :create]
