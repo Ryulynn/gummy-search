@@ -31,4 +31,8 @@ module SessionsHelper
     session.delete(:user_id)
     session.delete(:user_name)
   end
+
+  def admin_user
+    User.find_by(id: session[:user_id]).admin
+  end
 end

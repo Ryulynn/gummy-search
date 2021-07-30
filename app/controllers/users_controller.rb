@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :show, :update, :destroy, :review]
+  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy, :review]
   before_action :correct_account?, only: [:edit, :show, :update, :destroy, :review]
   before_action :not_logged_in_user, only: [:new]
+  before_action :admin_user?, only: [:index]
+
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new

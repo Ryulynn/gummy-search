@@ -3,6 +3,35 @@ require 'rails_helper'
 RSpec.describe "Users", type: :request do
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
+  let(:user_admin) { create(:user, admin: true) }
+
+  describe "GET /index" do
+    context "通常ユーザーの場合" do
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_password: user.password, user_id: user.id })
+        get users_path
+      end
+
+      it "ホームページにリダイレクトすること" do
+        expect(response).to redirect_to root_path
+      end
+
+      it "「不正なアクセスです」と表示されること" do
+        expect(flash[:notice]).to match('不正なアクセスです')
+      end
+    end
+
+    context "adminユーザーの場合" do
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_password: user_admin.password, user_id: user_admin.id })
+        get users_path
+      end
+
+      it "httpステータスが200を返すこと" do
+        expect(response).to have_http_status "200"
+      end
+    end
+  end
 
   describe "GET /new" do
     before do
