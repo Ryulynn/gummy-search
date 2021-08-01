@@ -24,6 +24,11 @@ RSpec.feature "review機能のfeatureテスト", type: :feature do
       click_on 'review-new-register-button' # idで指定
       expect(Review.last.comment).to eq "test_review_comment"
     end
+
+    scenario "入力せずに投稿ボタンを押した場合、review#newにリダイレクトされること" do
+      click_on 'review-new-register-button' # idで指定
+      expect(current_path).to eq new_review_path
+    end
   end
 
   feature "review#edit" do

@@ -13,11 +13,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @gummy = Gummy.find_by(id: params[:review]["gummy_id"])
     if @review.save
       flash[:notice] = "レビューを投稿しました"
       redirect_to "/users/#{session[:user_id]}/review"
     else
-      render "new"
+      flash[:notice] = "入力内容に誤りがあります"
+      redirect_to new_review_path(gummy: @gummy.id)
     end
   end
 
