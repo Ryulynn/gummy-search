@@ -9,6 +9,7 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
   let!(:review) { create(:review, user_id: user.id, gummy_id: gummy.id) }
   let!(:review2) { create(:review, user_id: user.id, gummy_id: gummy2.id) }
   let!(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
+  let(:user_guest) { create(:user, email: "guest@example.com") }
 
   feature "users#new" do
     background do
@@ -35,63 +36,95 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
   end
 
   feature "users#show" do
-    background do
-      visit login_path
-      fill_in 'session-name-form', with: "#{user.email}"
-      fill_in 'session-password-form', with: "#{user.password}"
-      click_on "Log in"
-      visit user_path(user.id)
+    context "通常のユーザーの場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user.email}"
+        fill_in 'session-password-form', with: "#{user.password}"
+        click_on "Log in"
+        visit user_path(user.id)
+      end
+
+      scenario "ユーザー名の表示" do
+        expect(page).to have_selector "p", text: "#{user.name}"
+      end
+
+      scenario "メールアドレスの表示" do
+        expect(page).to have_selector "p", text: "#{user.email}"
+      end
+
+      scenario "アイコン画像の表示" do
+        expect(page).to have_selector ".show_image_div > img[src*='#{user.image.identifier}']"
+      end
+
+      scenario "ログアウトボタンの表示" do
+        expect(page).to have_xpath("//input[@id='show-logout-button' and @value='ログアウト']")
+      end
+
+      scenario "ログアウトボタンをクリックすると、ログアウトされること" do
+        click_on "show-logout-button" # idで指定
+        expect(current_path).to eq root_path
+        expect(page).to have_content "ログアウトしました"
+      end
+
+      scenario "登録情報変更ボタンの表示" do
+        expect(page).to have_xpath("//input[@id='show-change-button' and @value='変更']")
+      end
+
+      scenario "登録情報変更ボタンのクリック時に正しいリンク先へアクセス" do
+        click_on "show-change-button" # idで指定
+        expect(current_path).to eq edit_user_path(user.id)
+      end
+
+      scenario "アカウント削除ボタンの表示" do
+        expect(page).to have_xpath("//input[@id='show-delete-button' and @value='アカウントを削除']")
+      end
+
+      scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
+        click_on "show-delete-button" # idで指定
+        expect(current_path).to eq root_path
+        expect(page).to have_content "アカウントを削除しました"
+      end
+
+      scenario "投稿したレビュー一覧リンククリック時に正しいリンク先へアクセス" do
+        click_on "投稿したレビュー一覧"
+        expect(current_path).to eq "/users/#{user.id}/review"
+      end
+
+      scenario "投稿した目撃情報一覧リンククリック時に正しいリンク先へアクセス" do
+        click_on "投稿した目撃情報一覧"
+        expect(current_path).to eq "/users/#{user.id}/map"
+      end
     end
 
-    scenario "ユーザー名の表示" do
-      expect(page).to have_selector "p", text: "#{user.name}"
-    end
+    context "ゲストユーザーの場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user_guest.email}"
+        fill_in 'session-password-form', with: "#{user_guest.password}"
+        click_on "Log in"
+        visit user_path(user_guest.id)
+      end
 
-    scenario "メールアドレスの表示" do
-      expect(page).to have_selector "p", text: "#{user.email}"
-    end
+      scenario "登録情報変更ボタンクリック時にホーム画面にリダイレクトされること" do
+        click_on "show-change-button" # idで指定
+        expect(current_path).to eq root_path
+      end
 
-    scenario "アイコン画像の表示" do
-      expect(page).to have_selector ".show_image_div > img[src*='#{user.image.identifier}']"
-    end
+      scenario "登録情報変更ボタンクリック時に「ゲストユーザーは使用できません」と表示されること" do
+        click_on "show-change-button" # idで指定
+        expect(page).to have_content "ゲストユーザーは使用できません"
+      end
 
-    scenario "ログアウトボタンの表示" do
-      expect(page).to have_xpath("//input[@id='show-logout-button' and @value='ログアウト']")
-    end
+      scenario "アカウント削除ボタンクリック時にホーム画面にリダイレクトされること" do
+        click_on "show-delete-button" # idで指定
+        expect(current_path).to eq root_path
+      end
 
-    scenario "ログアウトボタンをクリックすると、ログアウトされること" do
-      click_on "show-logout-button" # idで指定
-      expect(current_path).to eq root_path
-      expect(page).to have_content "ログアウトしました"
-    end
-
-    scenario "登録情報変更ボタンの表示" do
-      expect(page).to have_xpath("//input[@id='show-change-button' and @value='変更']")
-    end
-
-    scenario "登録情報変更ボタンのクリック時に正しいリンク先へアクセス" do
-      click_on "show-change-button" # idで指定
-      expect(current_path).to eq edit_user_path(user.id)
-    end
-
-    scenario "アカウント削除ボタンの表示" do
-      expect(page).to have_xpath("//input[@id='show-delete-button' and @value='アカウントを削除']")
-    end
-
-    scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
-      click_on "show-delete-button"
-      expect(current_path).to eq root_path
-      expect(page).to have_content "アカウントを削除しました"
-    end
-
-    scenario "投稿したレビュー一覧リンククリック時に正しいリンク先へアクセス" do
-      click_on "投稿したレビュー一覧"
-      expect(current_path).to eq "/users/#{user.id}/review"
-    end
-
-    scenario "投稿した目撃情報一覧リンククリック時に正しいリンク先へアクセス" do
-      click_on "投稿した目撃情報一覧"
-      expect(current_path).to eq "/users/#{user.id}/map"
+      scenario "アカウント削除ボタンクリック時に「ゲストユーザーは使用できません」と表示されること" do
+        click_on "show-delete-button" # idで指定
+        expect(page).to have_content "ゲストユーザーは使用できません"
+      end
     end
   end
 
