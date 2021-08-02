@@ -1,0 +1,16 @@
+<!--エラーメッセージ-->
+<div class="error_message">
+  <%= render"shared/error", obj: @maker %>
+</div>
+<!--編集フォーム-->
+<div class="maker_edit">
+  <h3>メーカー編集</h3>
+  <%= form_with model: @maker do |f| %>
+    <%= f.label :name, "メーカー名" %>
+    <%= f.text_field :name, id: "edit-maker-form" %>
+    </br>
+    <%= f.submit "変更", id: "edit-maker-change-button" %>
+  <% end %>
+  <h3>メーカーの削除</h3>
+  <%= link_to "削除", maker_path(@maker.id), method: :delete %>
+</div>
