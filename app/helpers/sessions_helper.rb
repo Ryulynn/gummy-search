@@ -35,4 +35,10 @@ module SessionsHelper
   def admin_user
     User.find_by(id: session[:user_id]).admin
   end
+
+  def guest_user
+    unless User.find_by(email: "guest@example.com").nil?
+      session[:user_id] == User.find_by(email: "guest@example.com").id
+    end
+  end
 end

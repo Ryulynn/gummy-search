@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe SessionsHelper, type: :helper do
   let(:user) { create(:user) }
   let(:user2) { create(:user) }
+  let(:user_admin) { create(:user, admin: true) }
+  let(:user_guest) { create(:user, email: "guest@example.com") }
 
   before do
     log_in(user)
@@ -60,5 +62,17 @@ RSpec.describe SessionsHelper, type: :helper do
     log_out
     expect(session[:user_id]).to eq nil
     expect(session[:user_name]).to eq nil
+  end
+
+  it "admin_userメソッドのテスト" do
+    log_out
+    log_in(user_admin)
+    expect(admin_user).to eq true
+  end
+
+  it "guest_userメソッドのテスト" do
+    log_out
+    log_in(user_guest)
+    expect(guest_user).to eq true
   end
 end

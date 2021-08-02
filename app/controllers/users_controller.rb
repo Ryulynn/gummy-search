@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_account?, only: [:edit, :show, :update, :destroy, :review, :map]
   before_action :not_logged_in_user, only: [:new]
   before_action :admin_user?, only: [:index]
+  before_action :guest_user?, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
