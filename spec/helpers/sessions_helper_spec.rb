@@ -64,12 +64,6 @@ RSpec.describe SessionsHelper, type: :helper do
     expect(session[:user_name]).to eq nil
   end
 
-  it "admin_userメソッドのテスト" do
-    log_out
-    log_in(user_admin)
-    expect(admin_user).to eq true
-  end
-
   it "guest_userメソッドのテスト" do
     log_out
     log_in(user_guest)
