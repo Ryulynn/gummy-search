@@ -76,16 +76,6 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
         expect(current_path).to eq edit_user_path(user.id)
       end
 
-      scenario "アカウント削除ボタンの表示" do
-        expect(page).to have_xpath("//input[@id='show-delete-button' and @value='アカウントを削除']")
-      end
-
-      scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
-        click_on "show-delete-button" # idで指定
-        expect(current_path).to eq root_path
-        expect(page).to have_content "アカウントを削除しました"
-      end
-
       scenario "投稿したレビュー一覧リンククリック時に正しいリンク先へアクセス" do
         click_on "投稿したレビュー一覧"
         expect(current_path).to eq "/users/#{user.id}/review"
@@ -115,47 +105,49 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
         click_on "show-change-button" # idで指定
         expect(page).to have_content "ゲストユーザーは使用できません"
       end
-
-      scenario "アカウント削除ボタンクリック時にホーム画面にリダイレクトされること" do
-        click_on "show-delete-button" # idで指定
-        expect(current_path).to eq root_path
-      end
-
-      scenario "アカウント削除ボタンクリック時に「ゲストユーザーは使用できません」と表示されること" do
-        click_on "show-delete-button" # idで指定
-        expect(page).to have_content "ゲストユーザーは使用できません"
-      end
     end
   end
 
   feature "users#edit" do
-    background do
-      visit login_path
-      fill_in 'session-name-form', with: "#{user.email}"
-      fill_in 'session-password-form', with: "#{user.password}"
-      click_on "Log in"
-      visit edit_user_path(user.id)
-    end
+    context "通常のユーザーの場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user.email}"
+        fill_in 'session-password-form', with: "#{user.password}"
+        click_on "Log in"
+        visit edit_user_path(user.id)
+      end
 
-    scenario "ユーザー名の変更ができること" do
-      fill_in 'edit-name-form', with: "editname"
-      click_on "edit-change-button"
-      expect(User.find_by(id: user.id).name).to eq "editname"
-    end
+      scenario "ユーザー名の変更ができること" do
+        fill_in 'edit-name-form', with: "editname"
+        click_on "edit-change-button"
+        expect(User.find_by(id: user.id).name).to eq "editname"
+      end
 
-    scenario "emailアドレスの変更ができること" do
-      fill_in 'edit-email-form', with: "edit@example.com"
-      click_on "edit-change-button"
-      expect(User.find_by(id: user.id).email).to eq "edit@example.com"
-    end
+      scenario "emailアドレスの変更ができること" do
+        fill_in 'edit-email-form', with: "edit@example.com"
+        click_on "edit-change-button"
+        expect(User.find_by(id: user.id).email).to eq "edit@example.com"
+      end
 
-    scenario "パスワードの変更ができること" do
-      fill_in 'edit-name-form', with: "editname"
-      fill_in 'edit-password-form', with: "edit_password"
-      fill_in 'edit-password-confirmation-form', with: "edit_password"
-      click_on "edit-change-button"
-      edit_user = User.find_by(id: user.id)
-      expect(edit_user.authenticate("edit_password")).to eq edit_user
+      scenario "パスワードの変更ができること" do
+        fill_in 'edit-name-form', with: "editname"
+        fill_in 'edit-password-form', with: "edit_password"
+        fill_in 'edit-password-confirmation-form', with: "edit_password"
+        click_on "edit-change-button"
+        edit_user = User.find_by(id: user.id)
+        expect(edit_user.authenticate("edit_password")).to eq edit_user
+      end
+
+      scenario "アカウント削除ボタンの表示" do
+        expect(page).to have_xpath("//input[@id='user-delete-button' and @value='アカウントを削除']")
+      end
+
+      scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
+        click_on "user-delete-button" # idで指定
+        expect(current_path).to eq root_path
+        expect(page).to have_content "アカウントを削除しました"
+      end
     end
   end
 
