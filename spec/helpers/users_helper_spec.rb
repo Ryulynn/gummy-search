@@ -6,10 +6,6 @@ RSpec.describe UsersHelper, type: :helper do
   let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id) }
   let(:review) { create(:review, user_id: user.id, gummy_id: gummy.id) }
 
-  it "reviewed_gummyメソッドのテスト" do
-    expect(helper.reviewed_gummy(review)).to eq gummy
-  end
-
   it "reviewd_gummy_flavorメソッドのテスト" do
     expect(helper.reviewed_gummy_flavor(review)).to eq flavor.name
   end
