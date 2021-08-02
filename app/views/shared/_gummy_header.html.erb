@@ -7,13 +7,14 @@
       </div>
       <div>
         <h3>レビューを投稿する</h3>
-        <%= link_to "レビュー投稿", new_review_path(gummy: gummy.id) %>
+        <%= link_to "レビューを投稿", new_review_path(gummy: gummy.id), id: "post-review-link" %>
         <h3>目撃情報を共有する</h3>
+        <%= link_to "位置情報を投稿", new_spot_path(gummy: gummy.id), id: "post-spot-link" %>
       </div>
     </div>
   </div>
   <div>
-    <p>レビュー</p>
-    <p>目撃情報</p>
+    <%= link_to "レビュー", gummy_path(params[:id]), id: "show-review-link" %>
+    <%= link_to "目撃情報", "/gummies/#{params[:id]}/map", id: "show-spot-link" %>
   </div>
 </div>
