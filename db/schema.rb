@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_065841) do
+ActiveRecord::Schema.define(version: 2021_07_30_190100) do
 
   create_table "flavors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2021_07_30_065841) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "spots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "address"
+    t.string "shop"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "user_id", null: false
+    t.bigint "gummy_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gummy_id"], name: "index_spots_on_gummy_id"
+    t.index ["user_id"], name: "index_spots_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -58,4 +71,6 @@ ActiveRecord::Schema.define(version: 2021_07_30_065841) do
 
   add_foreign_key "reviews", "gummies"
   add_foreign_key "reviews", "users"
+  add_foreign_key "spots", "gummies"
+  add_foreign_key "spots", "users"
 end

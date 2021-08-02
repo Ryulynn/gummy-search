@@ -168,4 +168,46 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  describe "GET /map" do
+    context "ログインしていない場合" do
+      before do
+        get "/users/#{user.id}/map"
+      end
+
+      it "ログイン画面にリダイレクトすること" do
+        expect(response).to redirect_to login_path
+      end
+
+      it "「ログインが必要です」と表示されること" do
+        expect(flash[:notice]).to match('ログインが必要です')
+      end
+    end
+
+    context "ログインしている場合" do
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_password: user.password, user_id: user.id })
+      end
+
+      it "ユーザー編集画面にアクセスできること" do
+        get "/users/#{user.id}/map"
+        expect(response).to have_http_status "200"
+      end
+    end
+
+    context "他のユーザーのページにアクセス" do
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_password: user.password, user_id: user.id })
+        get "/users/#{user2.id}/map"
+      end
+
+      it "ホームページにリダイレクトすること" do
+        expect(response).to redirect_to root_path
+      end
+
+      it "「不正なアクセスです」と表示されること" do
+        expect(flash[:notice]).to match('不正なアクセスです')
+      end
+    end
+  end
 end

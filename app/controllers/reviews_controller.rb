@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user
   before_action :reviewed?, only: [:new]
-  before_action :correct_reviewer?, only: [:edit, :destroy]
+  before_action :correct_poster?, only: [:edit, :destroy]
 
   def index
   end
@@ -13,11 +13,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @gummy = Gummy.find_by(id: params[:review]["gummy_id"])
     if @review.save
       flash[:notice] = "レビューを投稿しました"
       redirect_to "/users/#{session[:user_id]}/review"
     else
-      render "new"
+      flash[:notice] = "入力内容に誤りがあります"
+      redirect_to new_review_path(gummy: @gummy.id)
     end
   end
 
@@ -58,13 +60,6 @@ class ReviewsController < ApplicationController
     if reviewed(session[:user_id], params[:gummy])
       flash[:notice] = "この商品に対するレビューは投稿済みです。編集画面にアクセスしました。"
       redirect_to edit_review_path(your_review.id, user_id: session[:user_id])
-    end
-  end
-
-  def correct_reviewer?
-    unless correct_reviewer(params[:user_id], session[:user_id])
-      flash[:notice] = "不正なアクセスです"
-      redirect_to root_path
     end
   end
 

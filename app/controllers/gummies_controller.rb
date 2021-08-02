@@ -37,6 +37,13 @@ class GummiesController < ApplicationController
   def destroy
   end
 
+  def map
+    @gummy = Gummy.find_by(id: params[:id])
+    @reviews = Review.where(gummy_id: @gummy.id)
+    @spots = Spot.where(gummy_id: params[:id])
+    gon.spots = @spots
+  end
+
   private
 
   def gummy_params

@@ -1,0 +1,44 @@
+<div class="gummy_map">
+  <%= render "shared/gummy_header", gummy: @gummy %>
+  <div>
+    <% if @spots == [] %>
+      <p>目撃情報が登録されていません</p>
+    <% else %>
+      <div id="map"></div>
+      <% @spots.each_with_index do |spot, i| %>
+        <p id="gummy-map-spot-<%= i %>">
+          <%= spot.shop %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<script>
+  let map
+  let geocoder
+  let marker = [];
+  let infoWindow = [];
+  const spots = gon.spots
+
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: spots[0].latitude, lng: spots[0].longitude},
+      zoom: 12,
+    });
+
+    for (let i = 0; i < spots.length; i++){
+      marker[i] = new google.maps.Marker({
+        map: map,
+        position: {lat: spots[i].latitude, lng: spots[i].longitude}
+      });
+      infoWindow[i] = new google.maps.InfoWindow({
+        content: spots[i].shop
+      });
+      marker[i].addListener("click", function(){
+        infoWindow[i].open(map, marker[i]);
+      });
+    }
+  }
+</script>
