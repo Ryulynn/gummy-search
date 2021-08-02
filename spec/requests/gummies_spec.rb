@@ -52,4 +52,14 @@ RSpec.describe "Gummies", type: :request do
       expect(response).to have_http_status "200"
     end
   end
+
+  describe "GET /map" do
+    before do
+      get "/gummies/#{gummy.id}/map"
+    end
+
+    it "httpステータスが200を返すこと" do
+      expect(response).to have_http_status "200"
+    end
+  end
 end
