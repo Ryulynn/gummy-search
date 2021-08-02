@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   include SessionsHelper
   include ReviewsHelper
 
@@ -27,6 +28,13 @@ class ApplicationController < ActionController::Base
 
   def admin_user?
     unless admin_user
+      flash[:notice] = "不正なアクセスです"
+      redirect_to root_path
+    end
+  end
+
+  def correct_poster?
+    unless correct_poster(params[:user_id], session[:user_id])
       flash[:notice] = "不正なアクセスです"
       redirect_to root_path
     end

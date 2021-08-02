@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user
   before_action :reviewed?, only: [:new]
-  before_action :correct_reviewer?, only: [:edit, :destroy]
+  before_action :correct_poster?, only: [:edit, :destroy]
 
   def index
   end
@@ -60,13 +60,6 @@ class ReviewsController < ApplicationController
     if reviewed(session[:user_id], params[:gummy])
       flash[:notice] = "この商品に対するレビューは投稿済みです。編集画面にアクセスしました。"
       redirect_to edit_review_path(your_review.id, user_id: session[:user_id])
-    end
-  end
-
-  def correct_reviewer?
-    unless correct_reviewer(params[:user_id], session[:user_id])
-      flash[:notice] = "不正なアクセスです"
-      redirect_to root_path
     end
   end
 
