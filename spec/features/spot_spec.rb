@@ -5,7 +5,7 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
   let(:flavor) { create(:flavor) }
   let(:maker) { create(:maker) }
   let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
-  let(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
+  let(:spot) { create(:spot, :skip_validate, user_id: user.id, gummy_id: gummy.id) }
 
   feature "spot#new" do
     background do
