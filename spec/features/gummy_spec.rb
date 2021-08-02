@@ -7,19 +7,30 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
   let(:maker) { create(:maker) }
   let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
   let(:gummy_reviewed) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
-  let!(:gummy1) { create(:gummy, :skip_validate) }
-  let!(:gummy2) { create(:gummy, :skip_validate) }
-  let!(:review) { create(:review, user_id: user_reviewed.id, gummy_id: gummy_reviewed.id) }
-  let!(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
 
   feature "gummy#index" do
-    background do
-      visit gummies_path
+    context "グミの情報が登録されていない場合" do
+      background do
+        visit gummies_path
+      end
+
+      scenario "「グミの情報が登録されていません」と表示されること" do
+        expect(page).to have_content "グミの情報が登録されていません"
+      end
     end
 
-    scenario "登録済みのグミの情報が表示されていること" do
-      expect(page).to have_selector '#gummy-name-0', text: gummy1.name
-      expect(page).to have_selector '#gummy-name-1', text: gummy2.name
+    context "グミの情報が登録されている場合" do
+      let!(:gummy1) { create(:gummy, :skip_validate) }
+      let!(:gummy2) { create(:gummy, :skip_validate) }
+
+      background do
+        visit gummies_path
+      end
+
+      scenario "登録済みのグミの情報が表示されていること" do
+        expect(page).to have_selector '#gummy-name-0', text: gummy1.name
+        expect(page).to have_selector '#gummy-name-1', text: gummy2.name
+      end
     end
   end
 
@@ -44,6 +55,9 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
   end
 
   feature "gummy#show" do
+    let!(:review) { create(:review, user_id: user_reviewed.id, gummy_id: gummy_reviewed.id) }
+    let(:gummy_not_reviewed) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
+
     background do
       visit login_path
       fill_in 'session-name-form', with: "#{user.email}"
@@ -56,9 +70,20 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
       expect(page).to have_selector "#show-gummy-name", text: gummy.name
     end
 
-    scenario "商品レビューが表示されていること" do
-      visit gummy_path(gummy_reviewed.id)
-      expect(page).to have_selector "#gummy-show-review-0", text: review.comment
+    feature "レビューの表示" do
+      context "レビューが投稿されている場合" do
+        scenario "商品レビューが表示されていること" do
+          visit gummy_path(gummy_reviewed.id)
+          expect(page).to have_selector "#gummy-show-review-0", text: review.comment
+        end
+      end
+
+      context "レビューが投稿されていない場合" do
+        scenario "「レビューが投稿されていません」と表示されていること" do
+          visit gummy_path(gummy_not_reviewed.id)
+          expect(page).to have_content "レビューが投稿されていません"
+        end
+      end
     end
 
     feature "レビュー投稿画面に遷移できること" do
@@ -105,15 +130,29 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
   end
 
   feature "gummy#map" do
+    let!(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
+    let(:gummy_not_posted_spot) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
+
     scenario "レビュー一覧表示画面へ遷移できること" do
       visit "/gummies/#{gummy.id}/map"
       click_on 'show-review-link' # idで指定
       expect(current_path).to eq gummy_path(gummy.id)
     end
 
-    scenario "目撃情報が表示されていること" do
-      visit "/gummies/#{gummy.id}/map"
-      expect(page).to have_selector "#gummy-map-spot-0", text: spot.shop
+    feature "目撃情報の表示" do
+      context "目撃情報が投稿されている場合" do
+        scenario "目撃情報が表示されていること" do
+          visit "/gummies/#{gummy.id}/map"
+          expect(page).to have_selector "#gummy-map-spot-0", text: spot.shop
+        end
+      end
+
+      context "目撃情報が投稿されていない場合" do
+        scenario "「目撃情報が登録されていません」と表示されていること" do
+          visit "/gummies/#{gummy_not_posted_spot.id}/map"
+          expect(page).to have_content "目撃情報が登録されていません"
+        end
+      end
     end
   end
 end
