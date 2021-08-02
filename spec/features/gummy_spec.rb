@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "gummy機能のfeatureテスト", type: :feature do
   let(:user) { create(:user) }
   let(:user_reviewed) { create(:user) }
+  let(:user_admin) { create(:user, admin: true) }
   let(:flavor) { create(:flavor) }
   let(:maker) { create(:maker) }
   let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
@@ -108,6 +109,19 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
           expect(current_path).to eq edit_review_path(your_review.id)
         end
       end
+
+      context "アドミンユーザーの場合" do
+        scenario "グミ情報変更ページへ遷移できること" do
+          click_on "ログアウト"
+          visit login_path
+          fill_in 'session-name-form', with: "#{user_admin.email}"
+          fill_in 'session-password-form', with: "#{user_admin.password}"
+          click_on "Log in"
+          visit gummy_path(gummy.id)
+          click_on 'edit-gummy-link' # idで指定
+          expect(current_path).to eq edit_gummy_path(gummy.id)
+        end
+      end
     end
 
     scenario "目撃情報投稿画面に遷移できること" do
@@ -126,6 +140,21 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
       visit gummy_path(gummy.id)
       click_on 'show-spot-link' # idで指定
       expect(current_path).to eq "/gummies/#{gummy.id}/map"
+    end
+  end
+
+  feature "gummy#edit" do
+    background do
+      visit login_path
+      fill_in 'session-name-form', with: "#{user_admin.email}"
+      fill_in 'session-password-form', with: "#{user_admin.password}"
+      click_on "Log in"
+      visit edit_gummy_path(gummy.id)
+    end
+
+    scenario "グミ情報を削除できること" do
+      click_on "削除"
+      expect(Gummy.find_by(id: gummy.id)).to eq nil
     end
   end
 

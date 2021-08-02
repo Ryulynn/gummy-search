@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get    'gummies/:id/map', to: 'gummies#map'
   resources :users
   resources :gummies
-  resources :flavors, :only => [:new, :create]
-  resources :makers, :only => [:new, :create]
-  resources :reviews
-  resources :spots
+  resources :flavors, :except => [:show]
+  resources :makers, :except => [:show]
+  resources :reviews, :except => [:index, :show]
+  resources :spots, :expect => [:index, :show]
+  resources :admins, :only => [:index]
 end

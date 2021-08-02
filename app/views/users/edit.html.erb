@@ -25,4 +25,6 @@
     </br>
     <%= f.submit "変更", id: "edit-change-button" %>
   <% end %>
+  <h3>アカウントを削除する</h3>
+  <%= button_to "アカウントを削除", user_path, method: :delete, id: "user-delete-button" %>
 </div>
