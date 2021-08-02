@@ -1,5 +1,6 @@
 class GummiesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :admin_user?, only: [:edit, :update, :destroy]
 
   def index
     @gummies = Gummy.all
@@ -29,12 +30,26 @@ class GummiesController < ApplicationController
   end
 
   def edit
+    set_gummy
+    @makers = Maker.all
+    @flavors = Flavor.all
   end
 
   def update
+    set_gummy
+    if @gummy.update(gummy_params)
+      flash[:notice] = "グミの情報を編集しました"
+      redirect_to gummy_path(params[:id])
+    else
+      render "edit"
+    end
   end
 
   def destroy
+    set_gummy
+    @gummy.destroy
+    flash[:notice] = "グミの情報を削除しました"
+    redirect_to gummies_path
   end
 
   def map
@@ -48,5 +63,9 @@ class GummiesController < ApplicationController
 
   def gummy_params
     params.require(:gummy).permit(:name, :image, :flavor_id_1, :flavor_id_2, :flavor_id_3, :flavor_id_4, :maker_id)
+  end
+
+  def set_gummy
+    @gummy = Gummy.find_by(id: params[:id])
   end
 end

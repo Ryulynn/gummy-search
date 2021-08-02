@@ -2,14 +2,14 @@
 <div class="error_message">
   <%= render"shared/error", obj: @gummy %>
 </div>
-<!--登録フォーム-->
-<div class="gummy_new">
-  <h3>新しいグミを登録</h3>
+<!--編集フォーム-->
+<div class="maker_edit">
+  <h3>グミの情報編集</h3>
   <%= form_with model: @gummy do |f| %>
     <%= f.label :name, "商品名（必須）[例：〇〇グミ(グレープ)]" %>
-    <%= f.text_field :name, id: "new-gummy-name-form" %>
+    <%= f.text_field :name, id: "edit-gummy-name-form" %>
     <%= f.label :image, "商品画像（必須）" %>
-    <%= f.file_field :image, id: "new-gummy-image-form" %>
+    <%= f.file_field :image, id: "edit-gummy-image-form" %>
     <%= f.label :maker_id, "メーカー（必須）" %>
     <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}) %>
     <%= f.label :flavor_id_1, "フレーバー１（必須）" %>
@@ -21,10 +21,8 @@
     <%= f.label :flavor_id_4, "フレーバー４（任意）" %>
     <%= f.collection_select(:flavor_id_4, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
     </br>
-    <%= f.submit "グミを登録", id: "new-gummy-register-button" %>
+    <%= f.submit "グミ情報を変更", id: "edit-gummy-register-button" %>
   <% end %>
-  <h3>メーカーが存在しない場合はこちら</h3>
-  <%= button_to "メーカー追加", new_maker_path, method: :get, id: "new-maker-button" %>
-  <h3>フレーバーが存在しない場合はこちら</h3>
-  <%= button_to "フレーバー追加", new_flavor_path, method: :get, id: "new-flavor-button" %>
+  <h3>グミの削除</h3>
+  <%= link_to "削除", gummy_path(@gummy.id), method: :delete %>
 </div>
