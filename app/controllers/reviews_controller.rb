@@ -3,9 +3,6 @@ class ReviewsController < ApplicationController
   before_action :reviewed?, only: [:new]
   before_action :correct_poster?, only: [:edit, :destroy]
 
-  def index
-  end
-
   def new
     @review = Review.new
     @gummy = Gummy.find_by(id: params[:gummy])
@@ -21,9 +18,6 @@ class ReviewsController < ApplicationController
       flash[:notice] = "入力内容に誤りがあります"
       redirect_to new_review_path(gummy: @gummy.id)
     end
-  end
-
-  def show
   end
 
   def edit
