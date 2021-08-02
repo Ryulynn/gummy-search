@@ -127,51 +127,87 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
   end
 
   feature "users#review" do
-    background do
-      visit login_path
-      fill_in 'session-name-form', with: "#{user.email}"
-      fill_in 'session-password-form', with: "#{user.password}"
-      click_on "Log in"
-      visit "/users/#{user.id}/review"
+    let(:user_not_posted_review) { create(:user) }
+
+    context "レビューを投稿済みの場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user.email}"
+        fill_in 'session-password-form', with: "#{user.password}"
+        click_on "Log in"
+        visit "/users/#{user.id}/review"
+      end
+
+      scenario "投稿したレビューが表示されること" do
+        expect(page).to have_selector '#user-review-comment-0', text: review.comment
+        expect(page).to have_selector '#user-review-comment-1', text: review2.comment
+      end
+
+      scenario "商品名クリック時に商品詳細ページにアクセス" do
+        click_on "#{gummy.name}"
+        expect(current_path).to eq gummy_path(gummy.id)
+      end
+
+      scenario "編集ボタンクリック時に正しいリンク先へアクセス" do
+        click_on 'user-review-edit-button-0' # idで指定
+        expect(current_path).to eq edit_review_path(review.id)
+      end
     end
 
-    scenario "投稿したレビューが表示されること" do
-      expect(page).to have_selector '#user-review-comment-0', text: review.comment
-      expect(page).to have_selector '#user-review-comment-1', text: review2.comment
-    end
+    context "レビューを投稿していない場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user_not_posted_review.email}"
+        fill_in 'session-password-form', with: "#{user_not_posted_review.password}"
+        click_on "Log in"
+        visit "/users/#{user_not_posted_review.id}/review"
+      end
 
-    scenario "商品名クリック時に商品詳細ページにアクセス" do
-      click_on "#{gummy.name}"
-      expect(current_path).to eq gummy_path(gummy.id)
-    end
-
-    scenario "編集ボタンクリック時に正しいリンク先へアクセス" do
-      click_on 'user-review-edit-button-0' # idで指定
-      expect(current_path).to eq edit_review_path(review.id)
+      scenario "「投稿したレビューがありません」と表示されること" do
+        expect(page).to have_content "投稿したレビューがありません"
+      end
     end
   end
 
   feature "users#map" do
-    background do
-      visit login_path
-      fill_in 'session-name-form', with: "#{user.email}"
-      fill_in 'session-password-form', with: "#{user.password}"
-      click_on "Log in"
-      visit "/users/#{user.id}/map"
+    let(:user_not_posted_spot) { create(:user) }
+
+    context "目撃情報を投稿済みの場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user.email}"
+        fill_in 'session-password-form', with: "#{user.password}"
+        click_on "Log in"
+        visit "/users/#{user.id}/map"
+      end
+
+      scenario "投稿したレビューが表示されること" do
+        expect(page).to have_selector '#user-map-address-0', text: spot.address
+      end
+
+      scenario "商品名クリック時に商品詳細ページにアクセス" do
+        click_on "#{gummy.name}"
+        expect(current_path).to eq "/gummies/#{gummy.id}/map"
+      end
+
+      scenario "編集ボタンクリック時に正しいリンク先へアクセス" do
+        click_on 'user-map-edit-button-0' # idで指定
+        expect(current_path).to eq edit_spot_path(spot.id)
+      end
     end
 
-    scenario "投稿したレビューが表示されること" do
-      expect(page).to have_selector '#user-map-address-0', text: spot.address
-    end
+    context "目撃情報を投稿していない場合" do
+      background do
+        visit login_path
+        fill_in 'session-name-form', with: "#{user_not_posted_spot.email}"
+        fill_in 'session-password-form', with: "#{user_not_posted_spot.password}"
+        click_on "Log in"
+        visit "/users/#{user_not_posted_spot.id}/map"
+      end
 
-    scenario "商品名クリック時に商品詳細ページにアクセス" do
-      click_on "#{gummy.name}"
-      expect(current_path).to eq "/gummies/#{gummy.id}/map"
-    end
-
-    scenario "編集ボタンクリック時に正しいリンク先へアクセス" do
-      click_on 'user-map-edit-button-0' # idで指定
-      expect(current_path).to eq edit_spot_path(spot.id)
+      scenario "「投稿した目撃情報がありません」と表示されること" do
+        expect(page).to have_content "投稿した目撃情報がありません"
+      end
     end
   end
 end
