@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy, :review]
-  before_action :correct_account?, only: [:edit, :show, :update, :destroy, :review]
+  before_action :logged_in_user, only: [:index, :edit, :show, :update, :destroy, :review, :map]
+  before_action :correct_account?, only: [:edit, :show, :update, :destroy, :review, :map]
   before_action :not_logged_in_user, only: [:new]
   before_action :admin_user?, only: [:index]
 
@@ -59,6 +59,8 @@ class UsersController < ApplicationController
   end
 
   def map
+    set_user
+    @spots = Spot.where(user_id: @user.id)
   end
 
   private

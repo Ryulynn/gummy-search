@@ -1,0 +1,15 @@
+<div class="user_map">
+  <%if @spot == [] %>
+    <p>投稿した目撃情報がありません</p>
+  <% else %>
+    <% @spots.each_with_index do |spot, i| %>
+      <div>
+        <%= link_to "/gummies/#{spot.gummy.id}/map" do %>
+          <span><%= spot.gummy.name %>(<%= posted_spot_gummy_flavor(spot) %>)</span>
+        <% end %>
+        <span id="user-map-address-<%= i %>"><%= spot.address %></span>
+        <span><%= link_to "編集", edit_spot_path(spot.id, user_id: @user.id), id: "user-map-edit-button-#{i}" %></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>
