@@ -39,4 +39,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def guest_user?
+    if guest_user
+      flash[:notice] = "ゲストユーザーは使用できません"
+      redirect_to root_path
+    end
+  end
 end
