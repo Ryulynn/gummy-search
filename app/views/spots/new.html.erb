@@ -1,2 +1,18 @@
-<h1>Spots#new</h1>
-<p>Find me in app/views/spots/new.html.erb</p>
+<!--エラーメッセージ-->
+<div class="error_message">
+  <%= render"shared/error", obj: @spot %>
+</div>
+<!--登録フォーム-->
+<div class="user_sign_up">
+  <h3>目撃情報を投稿</h3>
+  <%= form_with model: @spot do |f| %>
+    <%= f.label :shop, "お店の名前(例：グミストア 〇〇店)" %>
+    <%= f.text_field :shop, id: "spot-new-shop-form" %>
+    <%= f.label :address, "お店の住所(例：〇〇県〇〇市〇〇1-1-1)" %>
+    <%= f.text_field :address, id: "spot-new-adress-form" %>
+    <%= f.hidden_field :user_id, value: session[:user_id] %>
+    <%= f.hidden_field :gummy_id, value: @gummy_id %>
+    </br>
+    <%= f.submit "投稿", id: "spot-new-register-button" %>
+  <% end %>
+</div>
