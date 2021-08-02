@@ -5,7 +5,7 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
   let(:flavor) { create(:flavor) }
   let(:maker) { create(:maker) }
   let(:gummy) { create(:gummy, :skip_validate, flavor_id_1: flavor.id, maker_id: maker.id) }
-  let(:spot) { create(:spot, :skip_validate, user_id: user.id, gummy_id: gummy.id) }
+  let!(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
 
   feature "spot#new" do
     background do
@@ -17,11 +17,10 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
     end
 
     scenario "目撃情報を投稿できること" do
-      fill_in 'spot-new-shop-form', with: "test_store"
+      fill_in 'spot-new-shop-form', with: "test_shop"
       fill_in 'spot-new-adress-form', with: "埼玉県さいたま市浦和区高砂３丁目１５−１"
       click_on 'spot-new-register-button' # idで指定
-      expect(Spot.last.shop).to eq "test_store"
-      expect(Spot.last.address).to eq "埼玉県さいたま市浦和区高砂３丁目１５−１"
+      expect(Spot.last.shop).to eq "test_shop"
     end
 
     scenario "入力せずに投稿ボタンを押した場合、review#newにリダイレクトされること" do
@@ -31,8 +30,6 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
   end
 
   feature "spot#edit" do
-    let!(:spot) { create(:spot, user_id: user.id, gummy_id: gummy.id) }
-
     background do
       visit login_path
       fill_in 'session-name-form', with: "#{user.email}"
