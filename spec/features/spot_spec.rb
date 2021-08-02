@@ -17,10 +17,13 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
     end
 
     scenario "目撃情報を投稿できること" do
-      fill_in 'spot-new-shop-form', with: "test_shop"
+      fill_in 'spot-new-shop-form', with: "test_store"
       fill_in 'spot-new-adress-form', with: "埼玉県さいたま市浦和区高砂３丁目１５−１"
       click_on 'spot-new-register-button' # idで指定
-      expect(Spot.last.shop).to eq "test_shop"
+      spot_shop = Spot.last.shop
+      spot_address = Spot.last.address
+      expect(spot_shop).to eq "test_store"
+      expect(spot_address).to eq "埼玉県さいたま市浦和区高砂３丁目１５−１"
     end
 
     scenario "入力せずに投稿ボタンを押した場合、review#newにリダイレクトされること" do
@@ -42,8 +45,10 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
       fill_in 'spot-edit-shop-form', with: "change_test_store"
       fill_in 'spot-edit-address-form', with: "東京都新宿区西新宿２丁目８−１"
       click_on 'spot-edit-register-button' # idで指定
-      expect(Spot.find(spot.id).shop).to eq "change_test_store"
-      expect(Spot.find(spot.id).address).to eq "東京都新宿区西新宿２丁目８−１"
+      edit_spot_shop = Spot.find_by(id: spot.id).shop
+      edit_spot_address = Spot.find_by(id: spot.id).address
+      expect(edit_spot_shop).to eq "change_test_store"
+      expect(edit_spot_address).to eq "東京都新宿区西新宿２丁目８−１"
     end
 
     scenario "目撃情報を削除できること" do
