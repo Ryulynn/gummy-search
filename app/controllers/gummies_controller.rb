@@ -4,6 +4,18 @@ class GummiesController < ApplicationController
 
   def index
     @gummies = Gummy.all
+    if params[:search_gummy] == "" || params[:search_maker_id] == "" || params[:search_flavor_id] == ""
+      @gummies = Gummy.all
+    elsif params[:search_gummy]
+      @gummies = Gummy.where("name LIKE?", "%#{params[:search_gummy]}%")
+    elsif params[:search_maker_id]
+      @gummies = Gummy.where(maker_id: params[:search_maker_id])
+    elsif params[:search_flavor_id]
+      @gummies = Gummy.where(flavor_id_1: params[:search_flavor_id]).
+        or(Gummy.where(flavor_id_2: params[:search_flavor_id])).
+        or(Gummy.where(flavor_id_3: params[:search_flavor_id])).
+        or(Gummy.where(flavor_id_4: params[:search_flavor_id]))
+    end
   end
 
   def new
@@ -62,7 +74,9 @@ class GummiesController < ApplicationController
   private
 
   def gummy_params
-    params.require(:gummy).permit(:name, :image, :flavor_id_1, :flavor_id_2, :flavor_id_3, :flavor_id_4, :maker_id)
+    unless params[:name].nil?
+      params.require(:gummy).permit(:name, :image, :flavor_id_1, :flavor_id_2, :flavor_id_3, :flavor_id_4, :maker_id)
+    end
   end
 
   def set_gummy

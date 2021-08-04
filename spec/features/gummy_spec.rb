@@ -33,6 +33,102 @@ RSpec.feature "gummy機能のfeatureテスト", type: :feature do
         expect(page).to have_selector '#gummy-name-1', text: gummy2.name
       end
     end
+
+    feature "検索機能のテスト" do
+      let!(:maker1) { create(:maker, name: "maker1") }
+      let!(:maker2) { create(:maker, name: "maker2") }
+      let!(:maker3) { create(:maker, name: "maker3") }
+      let!(:flavor1) { create(:flavor, name: "flavor1") }
+      let!(:flavor2) { create(:flavor, name: "flavor2") }
+      let!(:flavor3) { create(:flavor, name: "flavor3") }
+      let!(:gummy1a) { create(:gummy, :skip_validate, name: "gummy1a", flavor_id_1: flavor1.id, maker_id: maker1.id) }
+      let!(:gummy1b) { create(:gummy, :skip_validate, name: "gummy1b", flavor_id_1: flavor1.id, flavor_id_2: flavor3.id, maker_id: maker1.id) }
+      let!(:gummy2) { create(:gummy, :skip_validate, name: "gummy2", flavor_id_1: flavor2.id, maker_id: maker2.id) }
+      let!(:gummy3) { create(:gummy, :skip_validate, name: "gummy3", flavor_id_1: flavor3.id, maker_id: maker3.id) }
+
+      background do
+        visit gummies_path
+      end
+
+      feature "商品名の検索機能" do
+        scenario "未入力で検索した場合、すべてのグミの情報が表示されること" do
+          click_on 'search-gummy-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+          expect(page).to have_selector '#gummy-name-2', text: gummy2.name
+          expect(page).to have_selector '#gummy-name-3', text: gummy3.name
+        end
+
+        scenario "「gummy1」と入力した場合、gummy1aとgummy1bの情報が表示されること" do
+          fill_in 'search-gummy-form', with: "gummy1"
+          click_on 'search-gummy-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+        end
+
+        scenario "「g」と入力した場合、すべてのグミ情報が表示されること" do
+          fill_in 'search-gummy-form', with: "g"
+          click_on 'search-gummy-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+          expect(page).to have_selector '#gummy-name-2', text: gummy2.name
+          expect(page).to have_selector '#gummy-name-3', text: gummy3.name
+        end
+      end
+
+      feature "メーカー名の検索機能" do
+        scenario "未指定で検索した場合、すべてのグミの情報が表示されること" do
+          click_on 'search-maker-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+          expect(page).to have_selector '#gummy-name-2', text: gummy2.name
+          expect(page).to have_selector '#gummy-name-3', text: gummy3.name
+        end
+
+        scenario "「maker1」を指定した場合、gummy1aとgummy1bの情報が表示されること" do
+          find("#search-maker-form").find("option[value=#{maker1.id}]").select_option
+          click_on 'search-maker-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+        end
+
+        scenario "「maker2を指定した場合、gummy2の情報が表示されること」" do
+          find("#search-maker-form").find("option[value=#{maker2.id}]").select_option
+          click_on 'search-maker-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy2.name
+        end
+      end
+
+      feature "フレーバーの検索機能" do
+        scenario "未指定で検索した場合、すべてのグミの情報が表示されること" do
+          click_on 'search-flavor-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+          expect(page).to have_selector '#gummy-name-2', text: gummy2.name
+          expect(page).to have_selector '#gummy-name-3', text: gummy3.name
+        end
+
+        scenario "「flavor1」を指定した場合、gummy1aとgummy1bの情報が表示されること" do
+          find("#search-flavor-form").find("option[value=#{flavor1.id}]").select_option
+          click_on 'search-flavor-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1a.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy1b.name
+        end
+
+        scenario "「flavor2」を指定した場合、gummy2の情報が表示されること" do
+          find("#search-flavor-form").find("option[value=#{flavor2.id}]").select_option
+          click_on 'search-flavor-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy2.name
+        end
+
+        scenario "「flavor3」を指定した場合、gummy1bとgummy3の情報が表示されること" do
+          find("#search-flavor-form").find("option[value=#{flavor3.id}]").select_option
+          click_on 'search-flavor-button' # idで指定
+          expect(page).to have_selector '#gummy-name-0', text: gummy1b.name
+          expect(page).to have_selector '#gummy-name-1', text: gummy3.name
+        end
+      end
+    end
   end
 
   feature "gummy#new" do
