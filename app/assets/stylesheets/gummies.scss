@@ -4,9 +4,11 @@
 
 // ============index============
 .gummy_index{
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
+  .gummy_contents{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   a{
     width: 30%;

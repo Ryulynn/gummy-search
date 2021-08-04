@@ -1,16 +1,20 @@
 <div class="gummy_index">
-  <% if @gummies == [] %>
-    <p>グミの情報が登録されていません</p>
-  <% else %>
-    <% @gummies.each_with_index do |gummy, i| %>
-      <%= link_to gummy_path(gummy.id) do %>
-        <div class="gummy_list">
-          <p id="gummy-name-<%= i %>"><%= gummy.name %></p>
-          <div class="gummy_image_div" id="gummy-image-<%= i %>">
-            <%= image_tag "#{gummy.image}" %>
+  <h3>グミを検索</h3>
+  <%= render "/shared/search_box" %>
+  <div class="gummy_contents">
+    <% if @gummies == [] %>
+      <p>グミの情報が登録されていません</p>
+    <% else %>
+      <% @gummies.each_with_index do |gummy, i| %>
+        <%= link_to gummy_path(gummy.id) do %>
+          <div class="gummy_list">
+            <p id="gummy-name-<%= i %>"><%= gummy.name %></p>
+            <div class="gummy_image_div" id="gummy-image-<%= i %>">
+              <%= image_tag "#{gummy.image}" %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
