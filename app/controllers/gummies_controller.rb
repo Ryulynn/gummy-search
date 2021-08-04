@@ -74,7 +74,7 @@ class GummiesController < ApplicationController
   private
 
   def gummy_params
-    unless params[:name].nil?
+    unless params[:gummy][:name].nil?
       params.require(:gummy).permit(:name, :image, :flavor_id_1, :flavor_id_2, :flavor_id_3, :flavor_id_4, :maker_id)
     end
   end
