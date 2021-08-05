@@ -1,3 +1,60 @@
 // Place all the styles related to the Spots controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ============new============
+.spot_new{
+  width: 650px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  div{
+    margin-bottom: 10px;
+  }
+
+  #spot-new-shop-form{
+    width: 250px;
+  }
+
+  #spot-new-address-form{
+    width: 250px;
+  }
+
+  .submit_button{
+    padding: 3px 10px;
+    margin-top: 10px;
+  }
+}
+
+// ============edit============
+.spot_edit{
+  width: 650px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  div{
+    margin-bottom: 10px;
+  }
+
+  #spot-edit-shop-form{
+    width: 250px;
+  }
+
+  #spot-edit-address-form{
+    width: 250px;
+  }
+
+  h3{
+    margin-top: 40px;
+  }
+}
