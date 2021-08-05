@@ -1,6 +1,14 @@
-<div class="gummy_index">
-  <h3>グミを検索</h3>
-  <%= render "/shared/search_box" %>
+<div class="gummy_index content">
+  <div class="gummy_index_header">
+    <div class="gummy_index_search_box">
+      <h3>グミを検索</h3>
+      <%= render "/shared/search_box" %>
+    </div>
+    <dev class="gummy_index_register">
+      <h3>グミを登録する</h3>
+      <%= link_to "新規登録", new_gummy_path, class: "link_button" %>
+    </dev>
+  </div>
   <div class="gummy_contents">
     <% if @gummies == [] %>
       <p>グミの情報が登録されていません</p>

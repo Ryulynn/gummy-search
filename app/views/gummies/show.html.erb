@@ -1,14 +1,36 @@
-<div class="gummy_show">
+<div class="gummy_show content">
   <%= render "shared/gummy_header", gummy: @gummy %>
-  <div>
-    <% if @reviews == [] %>
-      <p>レビューが投稿されていません</p>
-    <% else %>
-      <% @reviews.each_with_index do |review, i| %>
-        <p id="gummy-show-review-<%= i %>">
-          <%= review.comment %>
-        </p>
+  <div class="gummy_show_review">
+    <div class="gummy_show_nav">
+      <h3>投稿された情報を見る</h3>
+      <div>
+        <%= link_to "レビュー", gummy_path(params[:id]), id: "show-review-link", class: "link_button" %>
+        <%= link_to "目撃情報", "/gummies/#{params[:id]}/map", id: "show-spot-link", class: "link_button" %>
+      </div>
+    </div>
+    <div class="gummy_show_review_list">
+      <% if @reviews == [] %>
+        <div class="gummy_show_review_box">
+          <p>レビューが投稿されていません</p>
+        </div>
+      <% else %>
+        <% @reviews.each_with_index do |review, i| %>
+          <div class="gummy_show_review_box">
+            <div class="gummy_show_reviewer_image">
+              <% if review.user.image.identifier.to_s == "default_user_icon.jpg" %>
+                <%= image_tag "/assets/default_user_icon.jpg" %>
+              <% else %>
+                <%= image_tag "#{review.user.image}" %>
+              <% end %>
+            </div>
+            <div id="gummy-show-review-<%= i %>" class="review_comment_div">
+              <p class="review_comment"><%= review.comment %></p>
+              </br>
+              <p class="reviewer_name">by<span><%= review.user.name %></span></p>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>

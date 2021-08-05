@@ -4,39 +4,121 @@
 
 // ============index============
 .gummy_index{
-  .gummy_contents{
-    margin-top: 20px;
+  margin: 0 auto;
+  padding: 0;
+
+  .gummy_index_header{
     display: flex;
-    justify-content: space-between;
-  }
+    margin-bottom: 80px;
 
-  a{
-    width: 30%;
-  }
+    .gummy_index_search_box{
+      width: 550px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      padding-left: 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
 
-  .gummy_list{
-    margin-top: 10px;
-    width: 100%;
-    height: 350px;
-    border: solid 2px black;
+      .search_box_div{
+        margin-left: 50px;
+      }
+    }
 
-    .gummy_image_div{
-      width: 100%;
-      height: 90%;
-      margin-bottom: 5px;
+    .gummy_index_register{
+      width: 200px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+      text-align: center;
 
-      img{
-        width: 100%;
-      height: 100%;
-      object-fit: contain;
+      h3{
+        margin-top: 40px;
+        margin-bottom: 80px;
       }
     }
   }
 
-  .gummy_list p{
-    font-weight: bold;
-    font-size: large;
-    margin: 0;
+  .gummy_contents{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    a{
+      width: 28%;
+      text-decoration: none;
+    }
+
+    .gummy_list{
+      margin-top: 20px;
+      width: 100%;
+      height: 370px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+      padding: 15px;
+
+      .gummy_image_div{
+        width: 100%;
+        height: 90%;
+        margin-bottom: 15px;
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      p{
+        font-weight: bold;
+        font-size: large;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+    }
+
+    .gummy_list:hover{
+      background-color: rgb(231, 201, 26);
+      transition: background-color 0.5s;
+      transform: scale(1.02, 1.02);
+      transition: transform 0.5s;
+    }
+  }
+}
+
+
+// ============new============
+.gummy_new{
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  .gummy_new_register_form{
+    margin-left: 20px;
+
+    div{
+      margin-bottom: 20px;
+    }
+
+    .submit_button{
+      padding: 3px 5px;
+    }
+  }
+
+  h3{
+    margin-top: 40px;
   }
 }
 
@@ -46,15 +128,117 @@
     .gummy_show_header_content{
       display: flex;
       justify-content: space-between;
+      margin: 0 auto;
+      padding: 10px 100px 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
 
-      .gummy_show_image{
-        width: 400px;
-        height: 400px;
+      .gummy_show_header_gummy{
+        margin-left: 30px;
 
-        img{
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+        .gummy_show_image{
+          width: 400px;
+          height: 400px;
+
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+
+      .gummy_show_header_link{
+        margin-top: 50px;
+        margin-right: 170px;
+      }
+    }
+  }
+
+  .gummy_show_review{
+    .gummy_show_nav{
+      width: 300px;
+      margin: 50px auto;
+      padding: 10px 100px 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+
+      h3{
+        text-align: center;
+      }
+
+      div{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      a{
+        margin-top: 30px;
+        text-decoration: none;
+        color: black;
+        border: black 1px solid;
+        cursor: pointer;
+      }
+
+      #show-review-link{
+        background-color: rgb(243, 173, 43);
+      }
+
+      #show-spot-link{
+        background-color: white;
+      }
+    }
+
+    .gummy_show_review_list{
+      display: flex;
+      flex-wrap: wrap;
+
+      .gummy_show_review_box{
+        width: 250px;
+        height: 100%;
+        margin: 10px auto;
+        background-color: #f8f7efe7;
+        color: black;
+        border-radius: 10px;
+        border: blueviolet solid 3px;
+        display: flex;
+
+        .gummy_show_reviewer_image{
+          width: 50px;
+          height: 50px;
+          margin: 5px 15px auto 5px;
+          border: solid rgb(150, 150, 161) 1px;
+          border-radius: 50%;
+
+          img{
+            width: 100%;
+            border-radius: 50%;
+          }
+        }
+
+        .review_comment_div{
+          width: 150px;
+          overflow-wrap: break-word;
+
+          .reviewer_name{
+            margin-left: 50px;
+          }
+
+          p{
+            display: inline-block;
+            width: 100%;
+            margin: 0;
+            padding-top: 20px;
+          }
+
+          span{
+            margin-left: 10px;
+            font-weight: bold;
+          }
         }
       }
     }
@@ -68,16 +252,31 @@
     .gummy_show_header_content{
       display: flex;
       justify-content: space-between;
+      margin: 0 auto;
+      padding: 10px 100px 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
 
-      .gummy_show_image{
-        width: 400px;
-        height: 400px;
+      .gummy_show_header_gummy{
+        margin-left: 30px;
 
-        img{
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+        .gummy_show_image{
+          width: 400px;
+          height: 400px;
+
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
         }
+      }
+
+      .gummy_show_header_link{
+        margin-top: 50px;
+        margin-right: 170px;
       }
     }
   }
@@ -85,5 +284,105 @@
   #map{
     height: 600px;
     width: 800px;
+  }
+
+  .gummy_show_map{
+    .gummy_show_nav{
+      width: 300px;
+      margin: 50px auto;
+      padding: 10px 100px 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+
+      h3{
+        text-align: center;
+      }
+
+      div{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      a{
+        margin-top: 30px;
+        text-decoration: none;
+        color: black;
+        border: black 1px solid;
+        cursor: pointer;
+      }
+
+      #show-review-link{
+        background-color: white;
+      }
+
+      #show-spot-link{
+        background-color: rgb(243, 173, 43);
+      }
+    }
+
+    .gummy_map{
+      margin: 0 auto;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+
+      h3{
+        margin-left: 40px;
+      }
+
+      #map{
+        margin: 40px auto auto;
+        border: yellowgreen 2px solid;
+      }
+    }
+
+    .gummy_spot_list{
+      margin: 50px auto;
+      padding-top: 10px;
+      padding-bottom: 40px;
+      padding-left: 40px;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+
+      li{
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+
+// ============edit============
+.gummy_edit{
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  .gummy_edit_register_form{
+    margin-left: 20px;
+
+    div{
+      margin-bottom: 20px;
+    }
+
+    .submit_button{
+      padding: 3px 5px;
+    }
+  }
+
+  h3{
+    margin-top: 40px;
   }
 }
