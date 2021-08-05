@@ -1,21 +1,23 @@
-<!--登録フォーム-->
-<div class="maker_new">
-  <h3>メーカーを登録する</h3>
-  <%= form_with model: @maker do |f| %>
-    <%= f.label :name, "メーカー" %>
-    <%= f.text_field :name, id: "new-maker-name-form" %>
-    </br>
-    <%= f.submit "登録", id: "new-maker-register-button" %>
-  <% end %>
-</div>
-<!--登録リスト-->
-<div class="maker_index">
-  <h3>登録済みメーカー</h3>
-  <ul>
-    <% @makers.each do |maker| %>
-      <li>
-        <%= maker.name %>
-      </li>
+<div class="maker_new content">
+  <!--登録フォーム-->
+  <div class="maker_new_register">
+    <h3>メーカーを登録する</h3>
+    <%= form_with model: @maker do |f| %>
+      <%= f.label :name, "メーカー" %>
+      <%= f.text_field :name, id: "new-maker-name-form" %>
+      </br>
+      <%= f.submit "登録", id: "new-maker-register-button", class: "submit_button" %>
     <% end %>
-  </ul>
+  </div>
+  <!--登録リスト-->
+  <div class="maker_new_list">
+    <h3>登録済みメーカー</h3>
+    <ul>
+      <% @makers.each do |maker| %>
+        <li>
+          <%= maker.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
