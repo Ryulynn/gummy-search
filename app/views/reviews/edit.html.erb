@@ -1,16 +1,16 @@
 <!--エラーメッセージ-->
-<div class="error_message">
-  <%= render"shared/error", obj: @user %>
-</div>
+  <%= render"shared/error", obj: @review %>
 <!--編集フォーム-->
 <div class="review_edit">
   <h3>レビュー編集</h3>
   <%= form_with model: @review do |f| %>
-    <%= f.label :comment, "レビュー内容" %>
+    <div class="review_edit_comment_label">
+      <%= f.label :comment, "レビュー内容" %>
+    </div>
     <%= f.text_area :comment, id: "review-edit-comment-form" %>
     </br>
-    <%= f.submit "変更", id: "review-edit-register-button" %>
+    <%= f.submit "変更", id: "review-edit-register-button", class: "submit_button" %>
   <% end %>
   <h3>レビューの削除</h3>
-  <%= link_to "削除", review_path(@review.id, user_id: @user.id), method: :delete %>
+  <%= link_to "削除", review_path(@review.id, user_id: @user.id), method: :delete, class: "link_button" %>
 </div>

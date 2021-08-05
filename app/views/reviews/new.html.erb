@@ -1,18 +1,21 @@
 <!--登録フォーム-->
-<div class="rebiew_new">
-  <h4>レビューを投稿</h4>
+<div class="review_new">
+  <h3>レビューを投稿</h3>
   <%= form_with model: @review do |f| %>
-    <div>
+    <div class="review_new_gummy_name">
       <span>商品名</span>
-      <span><%= @gummy.name %>(<%= flavor_name(@gummy) %>)</span>
+      <span><%= @gummy.name %></span>
     </div>
-    <div>
-      <%= f.label :comment, "投稿内容" %>
-      <%= f.text_area :comment, id: "review-new-comment-form" %>
-      <%= f.hidden_field :user_id, value: session[:user_id] %>
-      <%= f.hidden_field :gummy_id, value: @gummy.id %>
-      </br>
-      <%= f.submit "レビューを投稿", id: "review-new-register-button" %>
+    <div class="review_new_form">
+      <div>
+        <div class="review_new_comment_label">
+          <%= f.label :comment, "投稿内容" %>
+        </div>
+        <%= f.text_area :comment, id: "review-new-comment-form" %>
+        <%= f.hidden_field :user_id, value: session[:user_id] %>
+        <%= f.hidden_field :gummy_id, value: @gummy.id %>
+      </div>
+      <%= f.submit "レビューを投稿", id: "review-new-register-button", class: "submit_button" %>
     </div>
   <% end %>
 </div>
