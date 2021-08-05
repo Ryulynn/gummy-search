@@ -1,16 +1,13 @@
 <!--エラーメッセージ-->
-<div class="error_message">
   <%= render"shared/error", obj: @flavor %>
-</div>
 <!--編集フォーム-->
-<div class="flavor_edit">
+<div class="flavor_edit content">
   <h3>フレーバー編集</h3>
   <%= form_with model: @flavor do |f| %>
     <%= f.label :name, "フレーバー名" %>
     <%= f.text_field :name, id: "edit-flavor-form" %>
-    </br>
-    <%= f.submit "変更", id: "edit-flavor-change-button" %>
+    <%= f.submit "変更", id: "edit-flavor-change-button", class: "submit_button" %>
   <% end %>
   <h3>フレーバーの削除</h3>
-  <%= link_to "削除", flavor_path(@flavor.id), method: :delete %>
+  <%= link_to "削除", flavor_path(@flavor.id), method: :delete, class: "link_button" %>
 </div>

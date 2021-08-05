@@ -1,21 +1,22 @@
-<!--登録フォーム-->
-<div class="flavor_new">
-  <h3>フレーバーを登録する</h3>
-  <%= form_with model: @flavor do |f| %>
-    <%= f.label :name, "フレーバー" %>
-    <%= f.text_field :name, id: "new-flavor-name-form" %>
-    </br>
-    <%= f.submit "登録", id: "new-flavor-register-button" %>
-  <% end %>
-</div>
-<!--登録リスト-->
-<div class="flavor_index">
-  <h3>登録済みフレーバー</h3>
-  <ul>
-    <% @flavors.each do |flavor| %>
-      <li>
-        <%= flavor.name %>
-      </li>
+<div class="flavor_new content">
+  <!--登録フォーム-->
+  <div class="flavor_new_register">
+    <h3>フレーバーを登録する</h3>
+    <%= form_with model: @flavor do |f| %>
+      <%= f.label :name, "フレーバー" %>
+      <%= f.text_field :name, id: "new-flavor-name-form" %>
+      <%= f.submit "登録", id: "new-flavor-register-button", class: "submit_button" %>
     <% end %>
-  </ul>
+  </div>
+  <!--登録リスト-->
+  <div class="flavor_new_list">
+    <h3>登録済みフレーバー</h3>
+    <ul>
+      <% @flavors.each do |flavor| %>
+        <li>
+          <%= flavor.name %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>

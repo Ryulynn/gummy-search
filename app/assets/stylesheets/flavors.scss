@@ -1,3 +1,52 @@
 // Place all the styles related to the Flavors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ============index============
+.flavor_index{
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  span{
+    margin-right: 20px;
+  }
+}
+
+// ============new============
+.flavor_new{
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  .flavor_new_list{
+    h3{
+      margin-top: 50px;
+    }
+  }
+}
+
+// ============edit============
+.flavor_edit{
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  h3{
+    margin-top: 50px;
+  }
+}
