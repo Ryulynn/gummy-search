@@ -1,3 +1,41 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ============top============
+.home_top{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  h1{
+    margin: 0 0 40px 0;
+  }
+
+  h3{
+    margin-top: 50px;
+  }
+
+  .gummy_button_div{
+    margin: 0 auto 0 50px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.home_about{
+  width: 1140px;
+  margin: 70px auto 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+}
