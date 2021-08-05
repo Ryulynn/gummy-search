@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :flavors, :except => [:show]
   resources :makers, :except => [:show]
   resources :reviews, :except => [:index, :show]
-  resources :spots, :expect => [:index, :show]
+  resources :spots, :except => [:index, :show]
   resources :admins, :only => [:index]
 end
