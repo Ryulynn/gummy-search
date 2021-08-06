@@ -18,7 +18,7 @@ RSpec.feature "spot機能のfeatureテスト", type: :feature do
 
     scenario "目撃情報を投稿できること" do
       fill_in 'spot-new-shop-form', with: "test_shop"
-      fill_in 'spot-new-adress-form', with: "埼玉県さいたま市浦和区高砂３丁目１５−１"
+      fill_in 'spot-new-address-form', with: "埼玉県さいたま市浦和区高砂３丁目１５−１"
       click_on 'spot-new-register-button' # idで指定
       spot_shop = Spot.last.shop
       expect(spot_shop).to eq "test_shop"

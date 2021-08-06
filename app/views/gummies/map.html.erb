@@ -1,16 +1,32 @@
-<div class="gummy_map">
+<div class="gummy_map content">
   <%= render "shared/gummy_header", gummy: @gummy %>
-  <div>
-    <% if @spots == [] %>
-      <p>目撃情報が登録されていません</p>
-    <% else %>
+  <div class="gummy_show_map">
+    <div class="gummy_show_nav">
+      <h3>投稿された情報を見る</h3>
+      <div>
+        <%= link_to "レビュー", gummy_path(params[:id]), id: "show-review-link", class: "link_button" %>
+        <%= link_to "目撃情報", "/gummies/#{params[:id]}/map", id: "show-spot-link", class: "link_button" %>
+      </div>
+    </div>
+    <div class="gummy_map">
+      <h3>目撃情報のマップ</h3>
       <div id="map"></div>
-      <% @spots.each_with_index do |spot, i| %>
-        <p id="gummy-map-spot-<%= i %>">
-          <%= spot.shop %>
-        </p>
+    </div>
+    <div class="gummy_spot_list">
+      <h3>目撃された店舗名一覧</h3>
+      <% if @spots == [] %>
+        <p>目撃情報が登録されていません</p>
+      <% else %>
+        <ul>
+          <% @spots.each_with_index do |spot, i| %>
+            <li id="gummy-map-spot-<%= i %>">
+              <%= spot.shop %>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
-    <% end %>
+    </div>
+    </div>
   </div>
 </div>
 <script>

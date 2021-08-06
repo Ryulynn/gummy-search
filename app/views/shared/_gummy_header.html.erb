@@ -1,24 +1,20 @@
 <div class="gummy_show_header">
-  <div>
-    <h3 id="show-gummy-name"> <%= gummy.name %>[<%= maker_name(gummy) %>]</h3>
-    <div class="gummy_show_header_content">
+  <div class="gummy_show_header_content">
+    <div class="gummy_show_header_gummy">
+      <h3 id="show-gummy-name"> <%= gummy.name %>[<%= maker_name(gummy) %>]</h3>
       <div class="gummy_show_image">
         <%= image_tag "#{gummy.image}" %>
       </div>
-      <div>
-        <h3>レビューを投稿する</h3>
-        <%= link_to "レビューを投稿", new_review_path(gummy: gummy.id), id: "post-review-link" %>
-        <h3>目撃情報を共有する</h3>
-        <%= link_to "位置情報を投稿", new_spot_path(gummy: gummy.id), id: "post-spot-link" %>
-        <% if admin_user %>
-          <h3>グミの情報を変更する</h3>
-          <%= link_to "グミ情報変更", edit_gummy_path(params[:id]), id: "edit-gummy-link" %>
-        <% end %>
-      </div>
     </div>
-  </div>
-  <div>
-    <%= link_to "レビュー", gummy_path(params[:id]), id: "show-review-link" %>
-    <%= link_to "目撃情報", "/gummies/#{params[:id]}/map", id: "show-spot-link" %>
+    <div class="gummy_show_header_link">
+      <h3>レビューを投稿する</h3>
+      <%= link_to "レビューを投稿", new_review_path(gummy: gummy.id), id: "post-review-link", class: "link_button" %>
+      <h3>目撃情報を共有する</h3>
+      <%= link_to "位置情報を投稿", new_spot_path(gummy: gummy.id), id: "post-spot-link", class: "link_button" %>
+      <% if admin_user %>
+        <h3>グミの情報を変更する</h3>
+        <%= link_to "グミ情報変更", edit_gummy_path(params[:id]), id: "edit-gummy-link", class: "link_button" %>
+      <% end %>
+    </div>
   </div>
 </div>

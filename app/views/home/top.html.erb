@@ -1,8 +1,24 @@
-<h1>グミサーチへようこそ</h1>
-<%= link_to "グミサーチとは？", about_path %>
-<h3>グミを登録する</h3>
-<%= link_to "グミを登録", new_gummy_path %>
-<h3>グミ一覧</h3>
-<%= link_to "グミを探す", gummies_path %>
-<h3>グミを検索</h3>
-<%= render "/shared/search_box" %>
+<div class="home_top content">
+  <h1>グミサーチへようこそ</h1>
+  <div class="gummy_button_div">
+    <div>
+      <h3>グミを登録する</h3>
+      <%= link_to "グミを登録", new_gummy_path, class: "link_button" %>
+    </div>
+    <div>
+      <h3>グミを探す</h3>
+      <%= link_to "グミ一覧", gummies_path, class: "link_button" %>
+    </div>
+    <div>
+      <h3>グミを検索</h3>
+      <%= render "/shared/search_box" %>
+    </div>
+  </div>
+</div>
+<div class="home_about">
+  <h2>グミサーチとは</h2>
+  <div></div>
+    <p>新商品の移り変わりが激しいグミを食べ逃がさないために、グミの目撃情報を共有するためのサービスです。</p>
+    <p>グミのレビューも投稿して魅力を伝えましょう！</p>
+  </div>
+</div>

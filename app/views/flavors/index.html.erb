@@ -1,8 +1,10 @@
-<h3>フレーバー一覧</h3>
-<% @flavors.each_with_index do |flavor, i| %>
-  <div>
-    <span>フレーバーid：<%= flavor.id %></span>
-    <span>フレーバー名：<%= flavor.name %></span>
-    <span><%= link_to "編集", edit_flavor_path(flavor.id), id: "edit-flavor-link-#{i}" %></span>
-  </div>
-<% end %>
+<div class="flavor_index content">
+  <h3>フレーバー一覧</h3>
+  <% @flavors.each_with_index do |flavor, i| %>
+    <div>
+      <span>フレーバーid：<%= flavor.id %></span>
+      <span>フレーバー名：<%= flavor.name %></span>
+      <span><%= link_to "編集", edit_flavor_path(flavor.id), id: "edit-flavor-link-#{i}" %></span>
+    </div>
+  <% end %>
+</div>

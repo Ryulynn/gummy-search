@@ -1,14 +1,23 @@
-<div class="user_review">
+<div class="user_review content">
   <%if @reviews == [] %>
-    <p>投稿したレビューがありません</p>
+    <div class="user_review_not_posted">投稿したレビューがありません</div>
   <% else %>
     <% @reviews.each_with_index do |review, i| %>
-      <div>
-        <%= link_to gummy_path(review.gummy_id) do %>
-          <span><%= review.gummy.name %>(<%= reviewed_gummy_flavor(review) %>)</span>
+      <div class="user_review_box">
+        <%= link_to gummy_path(review.gummy_id), class: "user_review_gummy_link" do %>
+          <div class="user_review_gummy_info">
+            <div class=user_review_gummy_name>
+              <%= review.gummy.name %>
+            </div>
+            <div class="user_review_image_div">
+              <%= image_tag "#{review.gummy.image}" %>
+            </div>
+          </div>
         <% end %>
-        <span id="user-review-comment-<%= i %>"><%= review.comment %></span>
-        <span><%= link_to "編集", edit_review_path(review.id, user_id: @user.id), id: "user-review-edit-button-#{i}" %></span>
+        <div class="user_review_comment_div">
+          <p id="user-review-comment-<%= i %>"><%= review.comment %></p>
+        </div>
+        <p><%= link_to "編集", edit_review_path(review.id, user_id: @user.id), id: "user-review-edit-button-#{i}", class: "link_button" %></p>
       </div>
     <% end %>
   <% end %>

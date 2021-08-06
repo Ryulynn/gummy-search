@@ -1,20 +1,20 @@
-<div>
+<div class="search_box_div">
   <p>
     <%= form_with url: gummies_path, method: :get, local: true do |f| %>
       <%= f.text_field :search_gummy, placeholder: "商品名", id: "search-gummy-form" %>
-      <%= submit_tag "検索", id: "search-gummy-button" %>
+      <%= f.submit "検索", id: "search-gummy-button", class: "submit_button" %>
     <% end %>
   </p>
   <p>
     <%= form_with url: gummies_path, method: :get, local: true do |f| %>
-      <%= f.collection_select(:search_maker_id, Maker.all, :id, :name, {prompt: "メーカー名"}, {id: "search-maker-form"}) %>
-      <%= submit_tag "検索", id: "search-maker-button" %>
+      <%= f.collection_select(:search_maker_id, Maker.all, :id, :name, {prompt: "メーカー名"}, {id: "search-maker-form", class: "select_box"}) %>
+      <%= f.submit "検索", id: "search-maker-button", class: "submit_button" %>
     <% end %>
   </p>
   <p>
     <%= form_with url: gummies_path, method: :get, local: true do |f| %>
-      <%= f.collection_select(:search_flavor_id, Flavor.all, :id, :name, {prompt: "フレーバー"}, {id: "search-flavor-form"}) %>
-      <%= submit_tag "検索", id: "search-flavor-button" %>
+      <%= f.collection_select(:search_flavor_id, Flavor.all, :id, :name, {prompt: "フレーバー"}, {id: "search-flavor-form", class: "select_box"}) %>
+      <%= f.submit "検索", id: "search-flavor-button", class: "submit_button" %>
     <% end %>
   </p>
 </div>

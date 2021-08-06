@@ -1,7 +1,6 @@
 <div class="header">
   <div>
-    <%= link_to "グミサーチ", root_path, class: "app_name" %>
-    <%= link_to "グミサーチとは？", about_path, id: "about-link" %>
+    <%= link_to "グミサーチ", root_path, class: "app_name header_link" %>
   </div>
   <ul>
     <% if logged_in? %>
@@ -15,11 +14,11 @@
         </div>
       </li>
       <li><%= current_user %></li>
-      <li><%= link_to "マイアカウント", user_path(session[:user_id]) %></li>
-      <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+      <li><%= link_to "マイアカウント", user_path(session[:user_id]), class: "header_link" %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete, class: "header_link" %></li>
     <% else %>
-      <li><%= link_to "ログイン", login_path %></li>
-      <li><%= link_to "新規登録", new_user_path %></li>
+      <li><%= link_to "ログイン", login_path, class: "header_link" %></li>
+      <li><%= link_to "新規登録", new_user_path, class: "header_link" %></li>
     <% end %>
   </ul>
 </div>

@@ -62,6 +62,7 @@ class UsersController < ApplicationController
   def map
     set_user
     @spots = Spot.where(user_id: @user.id)
+    @gummies = Gummy.all
   end
 
   private

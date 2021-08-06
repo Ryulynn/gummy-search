@@ -1,18 +1,19 @@
 <!--エラーメッセージ-->
-<div class="error_message">
   <%= render"shared/error", obj: @spot %>
-</div>
 <!--編集フォーム-->
 <div class="spot_edit">
   <h3>目撃情報編集</h3>
   <%= form_with model: @spot do |f| %>
-    <%= f.label :shop, "お店の名前(例：グミストア 〇〇店)" %>
-    <%= f.text_field :shop, id: "spot-edit-shop-form" %>
-    <%= f.label :address, "お店の住所(例：〇〇県〇〇市〇〇1-1-1)" %>
-    <%= f.text_field :address, id: "spot-edit-address-form" %>
-    </br>
-    <%= f.submit "変更", id: "spot-edit-register-button" %>
+    <div>
+      <%= f.label :shop, "お店の名前(例：グミストア 〇〇店)" %>
+      <%= f.text_field :shop, id: "spot-edit-shop-form" %>
+    </div>
+    <div>
+      <%= f.label :address, "お店の住所(例：〇〇県〇〇市〇〇1-1-1)" %>
+      <%= f.text_field :address, id: "spot-edit-address-form" %>
+    </div>
+    <%= f.submit "変更", id: "spot-edit-register-button", class: "submit_button" %>
   <% end %>
   <h3>目撃情報の削除</h3>
-  <%= link_to "削除", spot_path(@spot.id, user_id: @user.id), method: :delete %>
+  <%= link_to "削除", spot_path(@spot.id, user_id: @user.id), method: :delete, class: "link_button" %>
 </div>

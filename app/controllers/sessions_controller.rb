@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "ログインしました"
       redirect_to root_path
     else
-      @login_error_message = "メールアドレスまたはパスワードが間違っています"
+      @login_error_message = "認証に失敗しました。メールアドレス、パスワードを確認してください。"
       @email = params[:email]
       render 'new'
     end

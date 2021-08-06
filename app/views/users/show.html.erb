@@ -1,28 +1,35 @@
 <div class="user_show">
   <div>
     <h3>アカウント情報</h3>
-    <p>ユーザー名</p>
-    <p><%= @user.name %></p>
-    <p>メールアドレス</p>
-    <p><%= @user.email %></p>
-    <p>アイコン画像</p>
-    <p>
-      <div class="show_image_div">
-        <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
-          <%= image_tag "/assets/default_user_icon.jpg" %>
-        <% else %>
-          <%= image_tag "#{current_user_image}" %>
-        <% end %>
+    <div class="user_info">
+      <div>
+        <span>ユーザー名：</span>
+        <span><%= @user.name %></span>
       </div>
-    </p>
-    <%= button_to "ログアウト", logout_path, method: :delete, id: "show-logout-button" %>
+      <div>
+        <span>メールアドレス：</span>
+        <span><%= @user.email %></span>
+      </div>
+      <p>アイコン画像</p>
+      <p>
+        <div class="show_image_div">
+          <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
+            <%= image_tag "/assets/default_user_icon.jpg" %>
+          <% else %>
+            <%= image_tag "#{current_user_image}" %>
+          <% end %>
+        </div>
+      </p>
+    </div>
+    <h3>ログアウトする</h3>
+    <%= link_to "ログアウト", logout_path, method: :delete, id: "show-logout-button", class: "link_button" %>
     <h3>登録情報の変更</h3>
-    <%= button_to "変更", edit_user_path, method: :get, id: "show-change-button" %>
+    <%= link_to "変更", edit_user_path, id: "show-change-button", class: "link_button" %>
   </div>
   <div>
     <h3>投稿したレビュー</h3>
-    <%= link_to "投稿したレビュー一覧", "/users/#{params[:id]}/review" %>
+    <%= link_to "投稿したレビュー一覧", "/users/#{params[:id]}/review", class: "link_button" %>
     <h3>投稿した目撃情報</h3>
-    <%= link_to "投稿した目撃情報一覧", "/users/#{params[:id]}/map" %>
+    <%= link_to "投稿した目撃情報一覧", "/users/#{params[:id]}/map", class: "link_button" %>
   </div>
 </div>

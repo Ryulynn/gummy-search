@@ -1,8 +1,10 @@
-<h3>メーカー一覧</h3>
-<% @makers.each_with_index do |maker, i| %>
-  <div>
-    <span>メーカーid：<%= maker.id %></span>
-    <span>メーカー名：<%= maker.name %></span>
-    <span><%= link_to "編集", edit_maker_path(maker.id), id: "edit-maker-link-#{i}" %></span>
-  </div>
-<% end %>
+<div class="maker_index content">
+  <h3>メーカー一覧</h3>
+  <% @makers.each_with_index do |maker, i| %>
+    <div>
+      <span>メーカーid：<%= maker.id %></span>
+      <span>メーカー名：<%= maker.name %></span>
+      <span><%= link_to "編集", edit_maker_path(maker.id), id: "edit-maker-link-#{i}" %></span>
+    </div>
+  <% end %>
+</div>

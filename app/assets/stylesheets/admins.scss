@@ -1,3 +1,19 @@
 // Place all the styles related to the Admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// ============index============
+.adomin_index{
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  h3{
+    margin-top: 50px;
+  }
+}

@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'home#top'
-  get    '/sample',  to: 'samples#index'
-  get    '/about',   to: 'home#about'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
@@ -14,6 +12,6 @@ Rails.application.routes.draw do
   resources :flavors, :except => [:show]
   resources :makers, :except => [:show]
   resources :reviews, :except => [:index, :show]
-  resources :spots, :expect => [:index, :show]
+  resources :spots, :except => [:index, :show]
   resources :admins, :only => [:index]
 end

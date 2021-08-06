@@ -1,17 +1,22 @@
-<div class="session_login">
+<div class="session_login content">
   <h3>ログイン</h3>
   <h5>ゲストユーザを使用できます。メールアドレス：guest@example.com,パスワード：password</h5>
   <div class="login_error_message">
     <%= @login_error_message %>
   </div>
   <%= form_with url: login_path do |f| %>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, value: @email, id: "session-name-form" %>
-    <%= f.label :password, "パスワード" %>
-    <%= f.password_field :password, id: "session-password-form" %>
-    </br>
-    <%= f.submit "Log in" %>
+    <div class="login_form">
+      <div>
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, value: @email, id: "session-name-form" %>
+      </div>
+      <div>
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, id: "session-password-form" %>
+      </div>
+      <%= f.submit "Log in", class: "submit_button" %>
+    </div>
   <% end %>
   <h3>アカウントをお持ちでない方はこちら</h3>
-  <%= button_to "新規登録", new_user_path, method: :get %>
+  <%= link_to "新規登録", new_user_path, class: "link_button" %>
 </div>

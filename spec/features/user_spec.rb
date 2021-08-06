@@ -26,7 +26,7 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
     end
 
     scenario "ログインボタンの表示" do
-      expect(page).to have_xpath("//input[@id='new-login-button' and @value='ログイン']")
+      expect(page).to have_selector "#new-login-button", text: "ログイン"
     end
 
     scenario "ログインボタンのクリック時に正しいリンク先にアクセスすること" do
@@ -46,11 +46,11 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
       end
 
       scenario "ユーザー名の表示" do
-        expect(page).to have_selector "p", text: "#{user.name}"
+        expect(page).to have_selector "span", text: "#{user.name}"
       end
 
       scenario "メールアドレスの表示" do
-        expect(page).to have_selector "p", text: "#{user.email}"
+        expect(page).to have_selector "span", text: "#{user.email}"
       end
 
       scenario "アイコン画像の表示" do
@@ -58,7 +58,7 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
       end
 
       scenario "ログアウトボタンの表示" do
-        expect(page).to have_xpath("//input[@id='show-logout-button' and @value='ログアウト']")
+        expect(page).to have_selector "#show-logout-button", text: "ログアウト"
       end
 
       scenario "ログアウトボタンをクリックすると、ログアウトされること" do
@@ -68,7 +68,7 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
       end
 
       scenario "登録情報変更ボタンの表示" do
-        expect(page).to have_xpath("//input[@id='show-change-button' and @value='変更']")
+        expect(page).to have_selector "#show-change-button"
       end
 
       scenario "登録情報変更ボタンのクリック時に正しいリンク先へアクセス" do
@@ -109,45 +109,43 @@ RSpec.feature "user機能のfeatureテスト", type: :feature do
   end
 
   feature "users#edit" do
-    context "通常のユーザーの場合" do
-      background do
-        visit login_path
-        fill_in 'session-name-form', with: "#{user.email}"
-        fill_in 'session-password-form', with: "#{user.password}"
-        click_on "Log in"
-        visit edit_user_path(user.id)
-      end
+    background do
+      visit login_path
+      fill_in 'session-name-form', with: "#{user.email}"
+      fill_in 'session-password-form', with: "#{user.password}"
+      click_on "Log in"
+      visit edit_user_path(user.id)
+    end
 
-      scenario "ユーザー名の変更ができること" do
-        fill_in 'edit-name-form', with: "editname"
-        click_on "edit-change-button"
-        expect(User.find_by(id: user.id).name).to eq "editname"
-      end
+    scenario "ユーザー名の変更ができること" do
+      fill_in 'edit-name-form', with: "editname"
+      click_on "edit-change-button"
+      expect(User.find_by(id: user.id).name).to eq "editname"
+    end
 
-      scenario "emailアドレスの変更ができること" do
-        fill_in 'edit-email-form', with: "edit@example.com"
-        click_on "edit-change-button"
-        expect(User.find_by(id: user.id).email).to eq "edit@example.com"
-      end
+    scenario "emailアドレスの変更ができること" do
+      fill_in 'edit-email-form', with: "edit@example.com"
+      click_on "edit-change-button"
+      expect(User.find_by(id: user.id).email).to eq "edit@example.com"
+    end
 
-      scenario "パスワードの変更ができること" do
-        fill_in 'edit-name-form', with: "editname"
-        fill_in 'edit-password-form', with: "edit_password"
-        fill_in 'edit-password-confirmation-form', with: "edit_password"
-        click_on "edit-change-button"
-        edit_user = User.find_by(id: user.id)
-        expect(edit_user.authenticate("edit_password")).to eq edit_user
-      end
+    scenario "パスワードの変更ができること" do
+      fill_in 'edit-name-form', with: "editname"
+      fill_in 'edit-password-form', with: "edit_password"
+      fill_in 'edit-password-confirmation-form', with: "edit_password"
+      click_on "edit-change-button"
+      edit_user = User.find_by(id: user.id)
+      expect(edit_user.authenticate("edit_password")).to eq edit_user
+    end
 
-      scenario "アカウント削除ボタンの表示" do
-        expect(page).to have_xpath("//input[@id='user-delete-button' and @value='アカウントを削除']")
-      end
+    scenario "アカウント削除ボタンの表示" do
+      expect(page).to have_selector "#user-delete-button", text: "アカウントを削除"
+    end
 
-      scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
-        click_on "user-delete-button" # idで指定
-        expect(current_path).to eq root_path
-        expect(page).to have_content "アカウントを削除しました"
-      end
+    scenario "アカウント削除ボタンクリック時に、アカウントが削除されること" do
+      click_on "user-delete-button" # idで指定
+      expect(current_path).to eq root_path
+      expect(page).to have_content "アカウントを削除しました"
     end
   end
 

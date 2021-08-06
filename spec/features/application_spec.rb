@@ -17,15 +17,6 @@ RSpec.feature "application機能のfeatureテスト", type: :feature do
         click_on "グミサーチ"
         expect(current_path).to eq root_path
       end
-
-      scenario "グミサーチとは？ボタンの表示" do
-        expect(page).to have_selector "#about-link", text: "グミサーチとは？"
-      end
-
-      scenario "グミサーチとは？ボタンのクリック時に正しいリンク先へアクセス" do
-        click_on "about-link" # idで指定している
-        expect(current_path).to eq about_path
-      end
     end
 
     context "ログインしていない場合" do
