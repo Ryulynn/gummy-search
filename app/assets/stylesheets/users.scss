@@ -3,13 +3,60 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+// ============index============
+.user_index{
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+}
+
+// ============new============
+.user_sign_up{
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  div{
+    margin-bottom: 20px;
+  }
+
+  h3{
+    margin-top: 30px;
+  }
+}
+
 // ============show============
 .user_show{
-  background-color: #999999;
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
+
+  .user_info{
+    padding-left: 30px;
+    border-bottom: blueviolet 2px solid;
+  }
 
   .show_image_div{
     width: 100px;
     height: 100px;
+    border-radius: 50%;
+    border: blueviolet solid 2px;
   }
 
   img{
@@ -17,71 +64,228 @@
     height: 100%;
     border-radius: 50%;
   }
+
+  h3{
+    margin-top: 30px;
+  }
 }
 
 // ============edit============
+.user_edit{
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #f8f7efe7;
+  color: black;
+  border-radius: 10px;
+  border: blueviolet solid 3px;
 
-.acbox{
-  width: auto;
-  font-size:0px; /* ラベルと開く部分を分離する時は数値を入れる */
-  margin:0 10px; /* ボックス全体の位置調整 */
+  h3{
+    margin-top: 30px;
+  }
+
+  .user_edit_form{
+    margin-bottom: 15px;
+  }
+
+  .acbox{
+    width: auto;
+    font-size:0px; /* ラベルと開く部分を分離する時は数値を入れる */
+    margin:15px 10px; /* ボックス全体の位置調整 */
+  }
+
+  .aclabel{
+    width: auto;
+    font-size: 16px; /* ラベルの文字サイズ */
+    font-weight: bold;
+    text-align: center;
+    background: #8BC34A; /* ラベルの背景色 */
+    position: relative;
+    display: block;
+    padding:8px;
+    border-radius: 4px; /* ラベルの角の丸み */
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .aclabel:hover{
+    background: #8BC34A; /* ラベルにマウスを乗せた時の背景色 */
+  }
+
+  .acinput{
+    display: none;
+  }
+
+  .aclabel:after{
+    color: #fff;
+    content:"▼"; /* ラベルのアイコン */
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -14px;
+  }
+
+  .acinput:checked ~ .aclabel::after {
+    content:"▲"; /* ラベルをクリックした後のアイコン */
+  }
+
+  .acbox-under{
+    height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.15s; /* 開閉スピードの設定 */
+  }
+
+  .acinput:checked ~ div{
+    height: auto;
+    padding: 18px; /* 開いた部分の枠内の余白 */
+    border-radius: 0px;
+    background: #F3F4F5; /* 開いた部分の背景色 */
+    opacity: 1;
+  }
+
+  .acinput:checked ~ .aclabel {
+    background: #8BC34A; /* クリック後のラベルの背景色 */
+  }
+
+  .acbox-under{
+    font-size: 15px; /* 開いた部分の文字サイズ */
+    color: #555555; /* 開いた部分の文字色 */
+  }
 }
 
-.aclabel{
-  width: auto;
-  font-size: 16px; /* ラベルの文字サイズ */
-  font-weight: bold;
-  text-align: center;
-  background: #8BC34A; /* ラベルの背景色 */
-  position: relative;
-  display: block;
-  padding:8px;
-  border-radius: 4px; /* ラベルの角の丸み */
-  cursor: pointer;
-  color: #fff;
+
+// ============review============
+.user_review{
+  display: flex;
+  flex-wrap: wrap;
+
+  .user_review_not_posted{
+    width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f8f7efe7;
+    color: black;
+    border-radius: 10px;
+    border: blueviolet solid 3px;
+    text-align: center;
+  }
+
+  .user_review_box{
+    width: 300px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f8f7efe7;
+    color: black;
+    border-radius: 10px;
+    border: blueviolet solid 3px;
+
+    .user_review_gummy_link{
+      text-decoration: none;
+      color: black;
+    }
+
+    .user_review_gummy_info{
+      padding: 10px 20px 25px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      border-radius: 10px;
+      border: black solid 1px;
+
+      .user_review_gummy_name{
+        overflow-wrap: break-word;
+      }
+
+      .user_review_image_div{
+        width: 80px;
+        height: 100px;
+        margin: 0 auto;
+
+        img{
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .user_review_gummy_info:hover{
+      background-color: rgb(231, 201, 26);
+      transition: background-color 0.5s;
+    }
+
+    .user_review_comment_div{
+      width: 100%;
+      overflow-wrap: break-word;
+    }
+  }
 }
 
-.aclabel:hover{
-  background: #8BC34A; /* ラベルにマウスを乗せた時の背景色 */
-}
+// ============map============
+.user_map{
+  .user_map_not_posted{
+    width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f8f7efe7;
+    color: black;
+    border-radius: 10px;
+    border: blueviolet solid 3px;
+    text-align: center;
+  }
 
-.acinput{
-  display: none;
-}
+  .user_map_box{
+    width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f8f7efe7;
+    color: black;
+    border-radius: 10px;
+    border: blueviolet solid 3px;
 
-.aclabel:after{
-  color: #fff;
-  content:"▼"; /* ラベルのアイコン */
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: -14px;
-}
+    .user_map_gummy_link{
+      text-decoration: none;
+      color: black;
 
-.acinput:checked ~ .aclabel::after {
-  content:"▲"; /* ラベルをクリックした後のアイコン */
-}
+      .user_map_gummy_info{
+        padding: 10px 20px 25px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 10px;
+        border: black solid 1px;
 
-.acbox-under{
-  height: 0px;
-  overflow: hidden;
-  opacity: 0;
-  transition: 0.15s; /* 開閉スピードの設定 */
-}
+        .user_map_gummy_name{
+          overflow-wrap: break-word;
+        }
 
-.acinput:checked ~ div{
-  height: auto;
-  padding: 18px; /* 開いた部分の枠内の余白 */
-  border-radius: 0px;
-  background: #F3F4F5; /* 開いた部分の背景色 */
-  opacity: 1;
-}
+        .user_map_image_div{
+          width: 80px;
+          height: 100px;
+          margin: 0 auto;
 
-.acinput:checked ~ .aclabel {
-  background: #8BC34A; /* クリック後のラベルの背景色 */
-}
+          img{
+            width: 100%;
+            object-fit: contain;
+          }
+        }
+      }
 
-.acbox-under{
-  font-size: 15px; /* 開いた部分の文字サイズ */
-  color: #555555; /* 開いた部分の文字色 */
+      .user_map_gummy_info:hover{
+        background-color: rgb(231, 201, 26);
+        transition: background-color 0.5s;
+      }
+    }
+
+    .user_map_address_info{
+      margin-bottom: 20px;
+
+      .link_button{
+        padding: 5px 10px;
+      }
+    }
+  }
 }

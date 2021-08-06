@@ -1,17 +1,21 @@
 <!--エラーメッセージ-->
-<div class="error_message">
   <%= render"shared/error", obj: @user %>
-</div>
 <!--編集フォーム-->
 <div class="user_edit">
   <h3>アカウント編集</h3>
   <%= form_with model: @user do |f| %>
-    <%= f.label :name, "ユーザー名(最大8文字)" %>
-    <%= f.text_field :name, id: "edit-name-form" %>
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, id: "edit-email-form" %>
-    <%= f.label :image, "アイコン画像" %>
-    <%= f.file_field :image, id: "edit-image-form" %>
+    <div class="user_edit_form">
+      <%= f.label :name, "ユーザー名(最大8文字)" %>
+      <%= f.text_field :name, id: "edit-name-form" %>
+    </div>
+    <div class="user_edit_form">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, id: "edit-email-form" %>
+    </div>
+    <div class="user_edit_form">
+      <%= f.label :image, "アイコン画像" %>
+      <%= f.file_field :image, id: "edit-image-form" %>
+    </div>
     <div class="acbox">
       <input class="acinput" id="ac-1" type="checkbox" />
       <label class="aclabel" for="ac-1">パスワードを変更する方はこちら</label>
@@ -22,9 +26,8 @@
           <%= f.password_field :password_confirmation, id: "edit-password-confirmation-form" %>
       </div>
     </div>
-    </br>
-    <%= f.submit "変更", id: "edit-change-button" %>
+    <%= f.submit "変更", id: "edit-change-button", class: "submit_button" %>
   <% end %>
   <h3>アカウントを削除する</h3>
-  <%= button_to "アカウントを削除", user_path, method: :delete, id: "user-delete-button" %>
+  <%= link_to "アカウントを削除", user_path, method: :delete, id: "user-delete-button", class: "link_button" %>
 </div>
