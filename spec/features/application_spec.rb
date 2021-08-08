@@ -53,19 +53,20 @@ RSpec.feature "application機能のfeatureテスト", type: :feature do
       end
 
       scenario "ユーザーアイコンの表示" do
-        expect(page).to have_selector ".image_div > img[src*='#{user.image.identifier}']"
+        expect(page).to have_selector "#image-link > img[src*='#{user.image.identifier}']"
+      end
+
+      scenario "ユーザーアイコンのクリック時に正しいリンク先へアクセス" do
+        click_on "image-link" # idで指定
+        expect(current_path).to eq user_path(user.id)
       end
 
       scenario "ユーザーネームの表示" do
         expect(page).to have_content "#{user.name}"
       end
 
-      scenario "マイアカウントボタンの表示" do
-        expect(page).to have_content "マイアカウント"
-      end
-
-      scenario "マイアカウントボタンのクリック時に正しいリンク先へアクセス" do
-        click_on "マイアカウント"
+      scenario "ユーザーネームのクリック時に正しいリンク先へアクセス" do
+        click_on "#{user.name}"
         expect(current_path).to eq user_path(user.id)
       end
 
