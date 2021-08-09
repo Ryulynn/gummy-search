@@ -49,7 +49,9 @@ class UsersController < ApplicationController
     set_user
     @user.destroy
     flash[:notice] = "アカウントを削除しました"
-    log_out
+    unless admin_user
+      log_out
+    end
     redirect_to root_path
   end
 
