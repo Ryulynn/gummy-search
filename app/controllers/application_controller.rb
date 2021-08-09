@@ -27,17 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user?
-    unless admin_user
+    if admin_user
+      true
+    else
       flash[:notice] = "不正なアクセスです"
       redirect_to root_path
-    else
-      true
     end
   end
 
   def admin_user_delete_access
     unless current_user?(User.find_by(id: params[:id]))
-      #binding.pry
       unless admin_user?
         flash[:notice] = "不正なアクセスです"
         redirect_to root_path
