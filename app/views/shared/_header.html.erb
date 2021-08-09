@@ -15,11 +15,11 @@
           <% end %>
         </div>
       </li>
-      <li><%= link_to "#{current_user}", user_path(session[:user_id]), class: "header_link" %></li>
-      <li><%= link_to "ログアウト", logout_path, method: :delete, class: "header_link" %></li>
+      <li><%= link_to "#{current_user}", user_path(session[:user_id]), class: "header_link header_link_menu" %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete, class: "header_link header_link_menu" %></li>
     <% else %>
       <li><%= link_to "ログイン", login_path, class: "header_link" %></li>
-      <li><%= link_to "新規登録", new_user_path, class: "header_link" %></li>
+      <li><%= link_to "新規登録", new_user_path, class: "header_link header_link_menu" %></li>
     <% end %>
   </ul>
 </div>
