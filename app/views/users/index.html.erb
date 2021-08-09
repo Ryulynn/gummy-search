@@ -10,6 +10,13 @@
             <span>(admin)</span>
           <% end %>
         </span>
+        <span>
+          <% unless user.admin %>
+            <span>
+              <%= link_to "削除", user_path(user.id), method: :delete %>
+            </span>
+          <% end %>
+        </span>
       </li>
     <% end %>
   </ul>
