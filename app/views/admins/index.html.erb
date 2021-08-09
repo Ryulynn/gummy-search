@@ -7,3 +7,29 @@
   <h3>メーカー一覧</h3>
   <%= link_to "メーカー一覧", makers_path, class: "link_button" %>
 </div>
+<div class="admin_index_review">
+  <h3>レビュー一覧</h3>
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <span><%= review.comment %></span>
+        <span>by&nbsp;</span><span class="admin_index_user_name"><%= review.user.name %></span>
+        <span>for&nbsp;<%= link_to "#{review.gummy.name}", gummy_path(review.gummy.id) %></span>
+        <span><%= link_to "削除", review_path(review.id), method: :delete %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="admin_index_spot">
+  <h3>目撃情報一覧</h3>
+  <ul>
+    <% @spots.each do |spot| %>
+      <li>
+        <span><%= spot.address %></span>
+        <span>by&nbsp;</span><span class="admin_index_user_name"><%= spot.user.name %></span>
+        <span>for&nbsp;<%= link_to "#{spot.gummy.name}", gummy_path(spot.gummy.id) %></span>
+        <span><%= link_to "削除", spot_path(spot.id), method: :delete %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -27,9 +27,20 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user?
-    unless admin_user
+    if admin_user
+      true
+    else
       flash[:notice] = "不正なアクセスです"
       redirect_to root_path
+    end
+  end
+
+  def admin_user_delete_access
+    unless current_user?(User.find_by(id: params[:id]))
+      unless admin_user?
+        flash[:notice] = "不正なアクセスです"
+        redirect_to root_path
+      end
     end
   end
 
@@ -37,6 +48,15 @@ class ApplicationController < ActionController::Base
     unless correct_poster(params[:user_id], session[:user_id])
       flash[:notice] = "不正なアクセスです"
       redirect_to root_path
+    end
+  end
+
+  def admin_user_delete_access_posted
+    unless correct_poster(params[:user_id], session[:user_id])
+      unless admin_user?
+        flash[:notice] = "不正なアクセスです"
+        redirect_to root_path
+      end
     end
   end
 
