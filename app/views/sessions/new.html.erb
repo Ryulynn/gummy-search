@@ -8,10 +8,12 @@
     <div class="login_form">
       <div>
         <%= f.label :email, "メールアドレス" %>
+        <br class="sp">
         <%= f.email_field :email, value: @email, id: "session-name-form" %>
       </div>
       <div>
         <%= f.label :password, "パスワード" %>
+        <br class="sp">
         <%= f.password_field :password, id: "session-password-form" %>
       </div>
       <%= f.submit "Log in", class: "submit_button" %>
