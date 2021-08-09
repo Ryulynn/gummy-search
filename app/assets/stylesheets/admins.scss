@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 // ============index============
-.adomin_index{
+.admin_index{
   margin: 0 auto;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -15,5 +15,23 @@
 
   h3{
     margin-top: 50px;
+  }
+}
+
+
+@media screen and(max-width: 1200px){
+  .admin_index{
+    width: 90%;
+  }
+}
+
+
+@media screen and(max-width: 600px){
+  .content{
+    width: 80%;
+  }
+
+  .admin_index{
+    padding: 20px 30px;
   }
 }

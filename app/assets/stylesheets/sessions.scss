@@ -36,5 +36,22 @@
       padding: 4px 10px;
     }
   }
+}
 
+@media screen and(max-width: 1200px){
+  .session_login{
+    width: 90%;
+  }
+}
+
+@media screen and(max-width: 600px){
+  .session_login{
+    width: 80%;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .session_login{
+    padding: 0 20px 40px;
+  }
 }

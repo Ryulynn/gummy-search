@@ -6,19 +6,20 @@
     <% if logged_in? %>
       <li>
         <div class="image_div">
-          <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
-            <%= image_tag "/assets/default_user_icon.jpg" %>
-          <% else %>
-            <%= image_tag "#{current_user_image}" %>
+          <%= link_to user_path(session[:user_id]), id: "image-link" do %>
+            <% if current_user_image.identifier.to_s == "default_user_icon.jpg" %>
+              <%= image_tag "/assets/default_user_icon.jpg" %>
+            <% else %>
+              <%= image_tag "#{current_user_image}" %>
+            <% end %>
           <% end %>
         </div>
       </li>
-      <li><%= current_user %></li>
-      <li><%= link_to "マイアカウント", user_path(session[:user_id]), class: "header_link" %></li>
-      <li><%= link_to "ログアウト", logout_path, method: :delete, class: "header_link" %></li>
+      <li><%= link_to "#{current_user}", user_path(session[:user_id]), class: "header_link header_link_menu" %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete, class: "header_link header_link_menu" %></li>
     <% else %>
       <li><%= link_to "ログイン", login_path, class: "header_link" %></li>
-      <li><%= link_to "新規登録", new_user_path, class: "header_link" %></li>
+      <li><%= link_to "新規登録", new_user_path, class: "header_link header_link_menu" %></li>
     <% end %>
   </ul>
 </div>

@@ -6,23 +6,29 @@
   <%= form_with model: @user do |f| %>
     <div class="user_edit_form">
       <%= f.label :name, "ユーザー名(最大8文字)" %>
+      <br class="sp">
       <%= f.text_field :name, id: "edit-name-form" %>
     </div>
     <div class="user_edit_form">
       <%= f.label :email, "メールアドレス" %>
+      <br class="sp">
       <%= f.email_field :email, id: "edit-email-form" %>
     </div>
     <div class="user_edit_form">
       <%= f.label :image, "アイコン画像" %>
+      <br class="sp">
       <%= f.file_field :image, id: "edit-image-form" %>
     </div>
     <div class="acbox">
       <input class="acinput" id="ac-1" type="checkbox" />
-      <label class="aclabel" for="ac-1">パスワードを変更する方はこちら</label>
+      <label class="aclabel" for="ac-1">パスワードの変更</label>
       <div class="acbox-under">
           <%= f.label :password, "パスワード" %>
+          <br class="sp">
           <%= f.password_field :password, id: "edit-password-form" %>
+          <br class="width_750">
           <%= f.label :password_confirmation, "パスワード(確認用)" %>
+          <br class="sp">
           <%= f.password_field :password_confirmation, id: "edit-password-confirmation-form" %>
       </div>
     </div>

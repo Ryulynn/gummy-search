@@ -11,7 +11,7 @@
     <div class="gummy_show_review_list">
       <% if @reviews == [] %>
         <div class="gummy_show_review_box">
-          <p>レビューが投稿されていません</p>
+          <p class="gummy_show_not_reviewed_message">レビューが投稿されていません</p>
         </div>
       <% else %>
         <% @reviews.each_with_index do |review, i| %>

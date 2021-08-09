@@ -2,37 +2,40 @@
   <%= render"shared/error", obj: @gummy %>
 <!--登録フォーム-->
 <div class="gummy_new content">
-  <h3>新しいグミを登録</h3>
+  <h3 class="gummy_new_title">新しいグミを登録</h3>
   <div class="gummy_new_register_form">
     <%= form_with model: @gummy do |f| %>
-      <div>
-        <%= f.label :name, "商品名（必須）[例：〇〇グミ(グレープ)]" %>
-        <%= f.text_field :name, id: "new-gummy-name-form" %>
-      </div>
-      <div>
-        <%= f.label :image, "商品画像（必須）" %>
-        <%= f.file_field :image, id: "new-gummy-image-form" %>
-      </div>
-      <div>
-        <%= f.label :maker_id, "メーカー（必須）" %>
-        <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}) %>
-      </div>
-      <div>
-        <%= f.label :flavor_id_1, "フレーバー１（必須）" %>
-        <%= f.collection_select(:flavor_id_1, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
-      </div>
-      <div>
-        <%= f.label :flavor_id_2, "フレーバー２（任意）" %>
-        <%= f.collection_select(:flavor_id_2, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
-      </div>
-      <div>
-        <%= f.label :flavor_id_3, "フレーバー３（任意）" %>
-        <%= f.collection_select(:flavor_id_3, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
-      </div>
-      <div>
-        <%= f.label :flavor_id_4, "フレーバー４（任意）" %>
-        <%= f.collection_select(:flavor_id_4, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
-      </div>
+      <ul>
+        <li>
+          <%= f.label :name, "商品名（必須）[例：〇〇グミ(グレープ)]" %>
+          <br class="sp">
+          <%= f.text_field :name, id: "new-gummy-name-form" %>
+        </li>
+        <li>
+          <%= f.label :image, "商品画像（必須）" %>
+          <%= f.file_field :image, id: "new-gummy-image-form" %>
+        </li>
+        <li>
+          <%= f.label :maker_id, "メーカー（必須）" %>
+          <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}, {class: "maker_form"}) %>
+        </li>
+        <li>
+          <%= f.label :flavor_id_1, "フレーバー１（必須）" %>
+          <%= f.collection_select(:flavor_id_1, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+        </li>
+        <li>
+          <%= f.label :flavor_id_2, "フレーバー２（任意）" %>
+          <%= f.collection_select(:flavor_id_2, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+        </li>
+        <li>
+          <%= f.label :flavor_id_3, "フレーバー３（任意）" %>
+          <%= f.collection_select(:flavor_id_3, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+        </li>
+        <li>
+          <%= f.label :flavor_id_4, "フレーバー４（任意）" %>
+          <%= f.collection_select(:flavor_id_4, @flavors, :id, :name, {prompt: "フレーバーを選択してください"}) %>
+        </li>
+      </ul>
       <%= f.submit "グミを登録", id: "new-gummy-register-button", class: "submit_button" %>
     <% end %>
   </div>

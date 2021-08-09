@@ -15,16 +15,73 @@
  */
 html{
   height: 100%;
+  width: 100%;
 }
 
 body{
+  font-family: 'Lato', 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
   margin: 0 auto;
   height: 75%;
+  width: 100%;
+}
+
+@media screen and(min-width: 481px){
+  .sp{
+    display: none;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .sp{
+    display: initial;
+  }
+}
+
+@media screen and(min-width: 601px){
+  .width_600{
+    display: none;
+  }
+}
+
+@media screen and(max-width: 600px){
+  .width_600{
+    display: initial;
+  }
+}
+
+@media screen and(min-width: 701px){
+  .width_700{
+    display: none;
+  }
+}
+
+@media screen and(max-width: 700px){
+  .width_700{
+    display: initial;
+  }
+}
+
+@media screen and(min-width: 751px){
+  .width_750{
+    display: none;
+  }
+}
+
+@media screen and(max-width: 750px){
+  .width_750{
+    display: initial;
+  }
 }
 
 header{
   background-color: blueviolet;
   color: white;
+}
+
+@media screen and(max-width: 480px){
+  header{
+    width: 100%;
+  }
 }
 
 .header{
@@ -36,10 +93,30 @@ header{
   padding: 20px;
 }
 
+@media screen and(max-width: 1200px){
+  .header{
+    width: 90%;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .header{
+    width: 95%;
+    margin: 0;
+    padding: 10px 0;
+  }
+}
+
 .header a{
   margin: auto 0;
   text-decoration: none;
   color: white;
+}
+
+@media screen and(max-width: 480px){
+  .header a{
+    margin-left: 20px;
+  }
 }
 
 .app_name{
@@ -72,6 +149,12 @@ header{
   border-radius: 50%;
 }
 
+@media screen and(max-width: 480px){
+  .header_link_menu{
+    display: none;
+  }
+}
+
 .body_content{
   min-height: 100%;
   background-image: url(/assets/bears.jpg);
@@ -81,7 +164,7 @@ header{
 }
 
 .content{
-  width: 1140px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -90,10 +173,24 @@ footer{
 }
 
 .footer{
-  width: 1140px;
+  max-width: 1140px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+}
+
+@media screen and(max-width: 1200px){
+  .footer{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .footer{
+    padding: 10px 0;
+  }
 }
 
 .footer p{
@@ -146,15 +243,27 @@ footer{
 
 .flash_div p{
   margin: 0;
-  line-height: 50px;
+  padding: 20px 0;
   font-size: 17px;
   font-weight: bold;
 }
 
+@media screen and(max-width: 1200px){
+  .flash_div p{
+    padding-left: 20px;
+    width: 90%;
+  }
+}
+
 .flash_message_div{
   width: 1140px;
-  height: 50px;
   margin: 0 auto;
+}
+
+@media screen and(max-width: 1200px){
+  .flash_message_div{
+    width: 100%;
+  }
 }
 
 .error_message{
@@ -166,6 +275,12 @@ footer{
   color: black;
   border-radius: 10px;
   border: rgb(245, 31, 24) solid 3px;
+}
+
+@media screen and(max-width: 550px){
+  .error_message{
+    width: 90%;
+  }
 }
 
 .error_message ul{
