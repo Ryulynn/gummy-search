@@ -6,10 +6,12 @@
   <%= form_with model: @spot do |f| %>
     <div>
       <%= f.label :shop, "お店の名前(例：グミストア 〇〇店)" %>
+        <br class="width_700">
       <%= f.text_field :shop, id: "spot-edit-shop-form" %>
     </div>
     <div>
       <%= f.label :address, "お店の住所(例：〇〇県〇〇市〇〇1-1-1)" %>
+        <br class="width_700">
       <%= f.text_field :address, id: "spot-edit-address-form" %>
     </div>
     <%= f.submit "変更", id: "spot-edit-register-button", class: "submit_button" %>

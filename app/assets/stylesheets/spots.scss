@@ -31,6 +31,20 @@
   }
 }
 
+@media screen and(max-width: 750px){
+  .spot_new{
+    width: 85%;
+    padding-left: 20px;
+  }
+}
+
+@media screen and(max-width: 370px){
+  .spot_new{
+    padding-left: 10px;
+    padding-bottom: 20px;
+  }
+}
+
 // ============edit============
 .spot_edit{
   width: 650px;
@@ -56,5 +70,19 @@
 
   h3{
     margin-top: 40px;
+  }
+}
+
+@media screen and(max-width: 750px){
+  .spot_edit{
+    width: 85%;
+    padding-left: 20px;
+  }
+}
+
+@media screen and(max-width: 370px){
+  .spot_edit{
+    padding-left: 10px;
+    padding-bottom: 20px;
   }
 }

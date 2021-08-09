@@ -4,11 +4,13 @@
     <h3>目撃情報を投稿</h3>
     <%= form_with model: @spot do |f| %>
       <div>
-        <%= f.label :shop, "お店の名前(例：グミストア 〇〇店)" %>
+        <%= f.label :shop, "お店の名前 (例：グミストア 〇〇店)" %>
+        <br class="width_700">
         <%= f.text_field :shop, id: "spot-new-shop-form" %>
       </div>
       <div>
-        <%= f.label :address, "お店の住所(例：〇〇県〇〇市〇〇1-1-1)" %>
+        <%= f.label :address, "お店の住所 (例：〇〇県〇〇市〇〇1-1-1)" %>
+        <br class="width_700">
         <%= f.text_field :address, id: "spot-new-address-form" %>
       </div>
       <div>
