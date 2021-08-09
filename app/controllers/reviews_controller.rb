@@ -1,7 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user
   before_action :reviewed?, only: [:new]
-  before_action :correct_poster?, only: [:edit, :destroy]
+  before_action :correct_poster?, only: [:edit]
+  before_action :admin_user_delete_access_posted, only: [:destroy]
 
   def new
     @review = Review.new
@@ -41,7 +42,11 @@ class ReviewsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @review.destroy
     flash[:notice] = "レビューを削除しました"
-    redirect_to "/users/#{@user.id}/review"
+    if admin_user
+      redirect_to admins_path
+    else
+      redirect_to "/users/#{@user.id}/review"
+    end
   end
 
   private

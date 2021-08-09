@@ -1,6 +1,7 @@
 class SpotsController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_poster?, only: [:edit, :destroy]
+  before_action :correct_poster?, only: [:edit]
+  before_action :admin_user_delete_access_posted, only: [:destroy]
 
   def new
     @spot = Spot.new
@@ -44,7 +45,11 @@ class SpotsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @spot.destroy
     flash[:notice] = "目撃情報を削除しました"
-    redirect_to "/users/#{@user.id}/map"
+    if admin_user
+      redirect_to admins_path
+    else
+      redirect_to "/users/#{@user.id}/map"
+    end
   end
 
   private

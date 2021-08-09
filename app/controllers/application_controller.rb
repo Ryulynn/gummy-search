@@ -51,6 +51,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_user_delete_access_posted
+    unless correct_poster(params[:user_id], session[:user_id])
+      unless admin_user?
+        flash[:notice] = "不正なアクセスです"
+        redirect_to root_path
+      end
+    end
+  end
+
   def guest_user?
     if guest_user
       flash[:notice] = "ゲストユーザーは使用できません"
