@@ -1,14 +1,16 @@
 <div class="user_index">
   <h3>ユーザー一覧</h3>
-  <% @users.each_with_index do |user, i| %>
-    <div>
-      <span>ユーザーid：<%= user.id %></span>
-      <span>ユーザー名：<%= user.name %></span>
-      <span>
-        <% if user.admin %>
-          <span>(admin)</span>
-        <% end %>
-      </span>
-    </div>
-  <% end %>
+  <ul>
+    <% @users.each_with_index do |user, i| %>
+      <li>
+        <span>ユーザーid：<%= user.id %></span>
+        <span>ユーザー名：<%= user.name %></span>
+        <span>
+          <% if user.admin %>
+            <span>(admin)</span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </div>

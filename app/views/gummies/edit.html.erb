@@ -7,6 +7,7 @@
     <%= form_with model: @gummy do |f| %>
       <div>
         <%= f.label :name, "商品名（必須）[例：〇〇グミ(グレープ)]" %>
+        <br class="sp">
         <%= f.text_field :name, id: "edit-gummy-name-form" %>
       </div>
       <div>
@@ -15,7 +16,7 @@
       </div>
       <div>
         <%= f.label :maker_id, "メーカー（必須）" %>
-        <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}) %>
+        <%= f.collection_select(:maker_id, @makers, :id, :name, {prompt: "メーカーを選択してください"}, {class: "maker_form"}) %>
       </div>
       <div>
         <%= f.label :flavor_id_1, "フレーバー１（必須）" %>
