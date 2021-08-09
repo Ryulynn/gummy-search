@@ -15,6 +15,17 @@
   border: blueviolet solid 3px;
 }
 
+@media screen and(max-width: 700px){
+  .user_index{
+    width: 80%;
+    padding-left: 20px;
+
+    li{
+      margin-top: 15px;
+    }
+  }
+}
+
 // ============new============
 .user_sign_up{
   width: 600px;
@@ -32,6 +43,18 @@
 
   h3{
     margin-top: 30px;
+  }
+}
+
+@media screen and(max-width: 700px){
+  .user_sign_up{
+    width: 80%;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .user_sign_up{
+    padding-left: 20px;
   }
 }
 
@@ -67,6 +90,31 @@
 
   h3{
     margin-top: 30px;
+  }
+}
+
+@media screen and(max-width: 750px){
+  .user_show{
+    width: 75%;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .user_show{
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .user_info{
+      padding-left: 0;
+
+      p{
+        margin-top: 25px;
+      }
+
+      .show_image_div{
+        margin: 0 auto;
+      }
+    }
   }
 }
 
@@ -156,13 +204,26 @@
   }
 }
 
+@media screen and(max-width: 750px){
+  .user_edit{
+    width: 75%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and(max-width: 480px){
+  .user_edit{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 
 // ============review============
 .user_review{
-  display: flex;
-  flex-wrap: wrap;
 
-  .user_review_not_posted{
+  h3{
     width: 600px;
     margin: 50px auto;
     padding: 10px;
@@ -173,58 +234,109 @@
     text-align: center;
   }
 
-  .user_review_box{
-    width: 300px;
-    margin: 50px auto;
-    padding: 10px;
-    background-color: #f8f7efe7;
-    color: black;
-    border-radius: 10px;
-    border: blueviolet solid 3px;
+  .user_review_content{
+    display: flex;
+    flex-wrap: wrap;
 
-    .user_review_gummy_link{
-      text-decoration: none;
+    .user_review_not_posted{
+      width: 600px;
+      margin: 50px auto;
+      padding: 10px;
+      background-color: #f8f7efe7;
       color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+      text-align: center;
     }
 
-    .user_review_gummy_info{
-      padding: 10px 20px 25px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
+    .user_review_box{
+      width: 300px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #f8f7efe7;
+      color: black;
       border-radius: 10px;
-      border: black solid 1px;
+      border: blueviolet solid 3px;
+      height: 100%;
 
-      .user_review_gummy_name{
-        overflow-wrap: break-word;
+      .user_review_gummy_link{
+        text-decoration: none;
+        color: black;
       }
 
-      .user_review_image_div{
-        width: 80px;
-        height: 100px;
-        margin: 0 auto;
+      .user_review_gummy_info{
+        padding: 10px 20px 25px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 10px;
+        border: black solid 1px;
 
-        img{
-          width: 100%;
-          object-fit: contain;
+        .user_review_gummy_name{
+          overflow-wrap: break-word;
+        }
+
+        .user_review_image_div{
+          width: 60%;
+          margin: 0 auto;
+
+          img{
+            width: 100%;
+            object-fit: contain;
+          }
         }
       }
+
+      .user_review_gummy_info:hover{
+        background-color: rgb(231, 201, 26);
+        transition: background-color 0.5s;
+      }
+
+      .user_review_comment_div{
+        width: 100%;
+        overflow-wrap: anywhere;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 650px){
+  .user_review{
+    h3{
+      width: 80%;
     }
 
-    .user_review_gummy_info:hover{
-      background-color: rgb(231, 201, 26);
-      transition: background-color 0.5s;
+    .user_review_content{
+      .user_review_not_posted{
+        width: 80%;
+      }
     }
+  }
+}
 
-    .user_review_comment_div{
-      width: 100%;
-      overflow-wrap: break-word;
+@media screen and(max-width: 480px){
+  .user_review{
+    flex-direction: column;
+
+    .user_review_box{
+      width: 90%;
     }
   }
 }
 
 // ============map============
 .user_map{
+  h3{
+    width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f8f7efe7;
+    color: black;
+    border-radius: 10px;
+    border: blueviolet solid 3px;
+    text-align: center;
+  }
+
   .user_map_not_posted{
     width: 600px;
     margin: 50px auto;
@@ -244,6 +356,7 @@
     color: black;
     border-radius: 10px;
     border: blueviolet solid 3px;
+    height: 100%;
 
     .user_map_gummy_link{
       text-decoration: none;
@@ -263,8 +376,7 @@
         }
 
         .user_map_image_div{
-          width: 80px;
-          height: 100px;
+          width: 25%;
           margin: 0 auto;
 
           img{
@@ -285,6 +397,46 @@
 
       .link_button{
         padding: 5px 10px;
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 650px){
+  .user_map{
+    .user_map_box{
+      width: 80%;
+
+      .user_map_address_info{
+        li{
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width: 650px){
+  .user_map{
+    h3{
+      width: 80%;
+    }
+
+    .user_map_not_posted{
+      width: 80%;
+    }
+  }
+}
+
+@media screen and(max-width: 480px){
+  .user_map{
+    .user_map_box{
+      .user_map_gummy_link{
+        .user_map_gummy_info{
+          .user_map_image_div{
+            width: 50%;
+          }
+        }
       }
     }
   }

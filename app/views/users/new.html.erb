@@ -6,18 +6,22 @@
   <%= form_with model: @user do |f| %>
     <div>
       <%= f.label :name, "ユーザー名(最大8文字)" %>
+      <br class="sp">
       <%= f.text_field :name, id: "new-name-form" %>
     </div>
     <div>
       <%= f.label :email, "メールアドレス" %>
+      <br class="sp">
       <%= f.email_field :email, id: "new-email-form" %>
     </div>
     <div>
       <%= f.label :password, "パスワード" %>
+      <br class="sp">
       <%= f.password_field :password, id: "new-password-form" %>
     </div>
     <div>
       <%= f.label :password_confirmation, "パスワード(確認用)" %>
+      <br class="sp">
       <%= f.password_field :password_confirmation, id: "new-password-confirmation-form" %>
     </div>
     <%= f.submit "新規登録", id: "new-register-button", class: "submit_button" %>

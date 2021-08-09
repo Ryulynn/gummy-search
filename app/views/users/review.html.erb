@@ -1,24 +1,27 @@
 <div class="user_review content">
-  <%if @reviews == [] %>
-    <div class="user_review_not_posted">投稿したレビューがありません</div>
-  <% else %>
-    <% @reviews.each_with_index do |review, i| %>
-      <div class="user_review_box">
-        <%= link_to gummy_path(review.gummy_id), class: "user_review_gummy_link" do %>
-          <div class="user_review_gummy_info">
-            <div class=user_review_gummy_name>
-              <%= review.gummy.name %>
+  <h3>投稿したレビュー一覧</h3>
+  <div class="user_review_content">
+    <%if @reviews == [] %>
+      <div class="user_review_not_posted">投稿したレビューがありません</div>
+    <% else %>
+      <% @reviews.each_with_index do |review, i| %>
+        <div class="user_review_box">
+          <%= link_to gummy_path(review.gummy_id), class: "user_review_gummy_link" do %>
+            <div class="user_review_gummy_info">
+              <div class=user_review_gummy_name>
+                <%= review.gummy.name %>
+              </div>
+              <div class="user_review_image_div">
+                <%= image_tag "#{review.gummy.image}" %>
+              </div>
             </div>
-            <div class="user_review_image_div">
-              <%= image_tag "#{review.gummy.image}" %>
-            </div>
+          <% end %>
+          <div class="user_review_comment_div">
+            <p id="user-review-comment-<%= i %>"><%= review.comment %></p>
           </div>
-        <% end %>
-        <div class="user_review_comment_div">
-          <p id="user-review-comment-<%= i %>"><%= review.comment %></p>
+          <p><%= link_to "編集", edit_review_path(review.id, user_id: @user.id), id: "user-review-edit-button-#{i}", class: "link_button" %></p>
         </div>
-        <p><%= link_to "編集", edit_review_path(review.id, user_id: @user.id), id: "user-review-edit-button-#{i}", class: "link_button" %></p>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
