@@ -49,6 +49,16 @@
     justify-content: space-between;
     flex-wrap: wrap;
 
+    .gummy_not_posted_div{
+      width: 300px;
+      margin: 0 auto;
+      background-color: #f8f7efe7;
+      color: black;
+      border-radius: 10px;
+      border: blueviolet solid 3px;
+      text-align: center;
+    }
+
     a{
       width: 28%;
       height: 100%;
@@ -152,6 +162,12 @@
         .search_box_div{
           margin: 0;
         }
+      }
+    }
+
+    .gummy_contents{
+      .gummy_not_posted_div{
+        width: 95%;
       }
     }
   }
@@ -325,12 +341,12 @@
           overflow-wrap: anywhere;
 
           .reviewer_name{
-            margin-left: 50px;
+            margin-left: 15px;
           }
 
           p{
             display: inline-block;
-            width: 100%;
+            width: 110%;
             margin: 0;
             padding-top: 20px;
           }

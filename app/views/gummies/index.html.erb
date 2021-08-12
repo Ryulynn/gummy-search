@@ -11,7 +11,9 @@
   </div>
   <div class="gummy_contents">
     <% if @gummies == [] %>
-      <p>グミの情報が登録されていません</p>
+      <div class="gummy_not_posted_div">
+        <p>グミの情報が登録されていません</p>
+      </div>
     <% else %>
       <% @gummies.each_with_index do |gummy, i| %>
         <%= link_to gummy_path(gummy.id) do %>
