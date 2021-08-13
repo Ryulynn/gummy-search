@@ -246,6 +246,10 @@
       .gummy_show_header_gummy{
         margin-left: 30px;
 
+        h3{
+          max-width: 500px;
+        }
+
         .gummy_show_image{
           width: 400px;
           height: 400px;
@@ -397,6 +401,7 @@
           margin-left: 0;
 
           .gummy_show_image{
+            margin: 0 auto;
             width: 300px;
             height: 300px;
           }
@@ -486,6 +491,10 @@
       .gummy_show_header_gummy{
         margin-left: 30px;
 
+        h3{
+          max-width: 500px;
+        }
+
         .gummy_show_image{
           width: 400px;
           height: 400px;
@@ -511,6 +520,11 @@
   }
 
   .gummy_show_map{
+    .gummy_map_not_posted{
+      width: 350px;
+      text-align: center;
+    }
+
     .gummy_show_nav{
       width: 300px;
       margin: 50px auto;
@@ -630,6 +644,7 @@
           margin-left: 0;
 
           .gummy_show_image{
+            margin: 0 auto;
             width: 300px;
             height: 300px;
           }
@@ -687,6 +702,11 @@
 @media screen and(max-width: 480px){
   .gummy_map{
     .gummy_show_map{
+      .gummy_map_not_posted{
+        width: 90%;
+        padding: 0;
+      }
+
       .gummy_show_nav{
         width: 95%;
 
