@@ -20,6 +20,7 @@
       <%= render "/shared/footer" %>
     </footer>
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>
+    <script src="https://cdn-test-20211108.s3.ap-northeast-1.amazonaws.com/landingV1.js"></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
