@@ -124,12 +124,12 @@ workflows:
       - rubocop:
           requires:
             - build
-      - rspec:
-          requires:
-            - rubocop
+      # - rspec:
+      #     requires:
+      #       - rubocop
       - deploy:
-          requires:
-            - rspec
+          # requires:
+          #   - rspec
           filters:
             branches:
               only: main
